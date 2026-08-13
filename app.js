@@ -1,241 +1,29 @@
-const translations = {
-  en: {
-    brandRole: "Resume / Portfolio", navAbout: "About", navExperience: "Experience", navProjects: "Projects", navSkills: "Skills",
-    heroKicker: "Product · Operations · Technology", heroHello: "I build useful products", heroAccent: "and make complex work simpler.",
-    heroLead: "Product & Operations Leader with hands-on experience in software, automation, retail, telecom and international operations.",
-    heroPrimary: "View experience", heroSecondary: "Save as PDF", profileEyebrow: "Based in Ukraine",
-    profileTitle: "Product & Operations Leader · Software Builder", factYears: "years of professional experience", factTeam: "people led in teams", factLanguages: "site languages",
-    aboutEyebrow: "Profile", aboutTitle: "Business thinking with a builder mindset.",
-    aboutP1: "I work at the intersection of operations, product development and technology. My background spans telecom engineering, international order management, retail leadership and entrepreneurship.",
-    aboutP2: "Today I also build practical software for Android, Windows and the web, combining hands-on development with product thinking, automation and a strong focus on usability.",
-    quoteText: "The best system is the one that removes friction, makes the next action obvious and keeps working when things get complicated.",
-    expEyebrow: "Career", expTitle: "Experience across technology and operations.", projectsEyebrow: "Selected work", projectsTitle: "Products I build and shape.",
-    skillsEyebrow: "Capabilities", skillsTitle: "A hybrid toolkit: leadership, product and engineering.", stackEyebrow: "Tools & stack", stackTitle: "Technologies I use to get work done.",
-    contactEyebrow: "Contact", contactTitle: "Have a product, operation or technical challenge?", contactText: "I am open to conversations about product, operations, automation and software projects.", contactEmail: "Email me", footerRole: "Product · Operations · Technology"
-  },
-  pl: {
-    brandRole: "CV / Portfolio", navAbout: "O mnie", navExperience: "Doświadczenie", navProjects: "Projekty", navSkills: "Kompetencje",
-    heroKicker: "Produkt · Operacje · Technologia", heroHello: "Tworzę użyteczne produkty", heroAccent: "i upraszczam złożoną pracę.",
-    heroLead: "Lider produktu i operacji z praktycznym doświadczeniem w oprogramowaniu, automatyzacji, handlu detalicznym, telekomunikacji i operacjach międzynarodowych.",
-    heroPrimary: "Zobacz doświadczenie", heroSecondary: "Zapisz jako PDF", profileEyebrow: "Ukraina",
-    profileTitle: "Product & Operations Leader · Software Builder", factYears: "lat doświadczenia zawodowego", factTeam: "osób w prowadzonych zespołach", factLanguages: "wersje językowe strony",
-    aboutEyebrow: "Profil", aboutTitle: "Myślenie biznesowe i podejście twórcy.",
-    aboutP1: "Pracuję na styku operacji, rozwoju produktu i technologii. Moje doświadczenie obejmuje inżynierię telekomunikacyjną, zarządzanie zamówieniami międzynarodowymi, kierowanie sprzedażą detaliczną i przedsiębiorczość.",
-    aboutP2: "Obecnie tworzę również praktyczne oprogramowanie dla Androida, Windows i webu, łącząc rozwój produktu, automatyzację i nacisk na użyteczność.",
-    quoteText: "Najlepszy system usuwa tarcie, jasno pokazuje następny krok i działa również wtedy, gdy sytuacja staje się złożona.",
-    expEyebrow: "Kariera", expTitle: "Doświadczenie w technologii i operacjach.", projectsEyebrow: "Wybrane projekty", projectsTitle: "Produkty, które tworzę i rozwijam.",
-    skillsEyebrow: "Kompetencje", skillsTitle: "Połączenie przywództwa, produktu i inżynierii.", stackEyebrow: "Narzędzia i stack", stackTitle: "Technologie, których używam w pracy.",
-    contactEyebrow: "Kontakt", contactTitle: "Masz wyzwanie produktowe, operacyjne lub techniczne?", contactText: "Jestem otwarty na rozmowy o produktach, operacjach, automatyzacji i projektach software'owych.", contactEmail: "Napisz do mnie", footerRole: "Produkt · Operacje · Technologia"
-  },
-  ru: {
-    brandRole: "Резюме / Портфолио", navAbout: "Обо мне", navExperience: "Опыт", navProjects: "Проекты", navSkills: "Навыки",
-    heroKicker: "Продукт · Операции · Технологии", heroHello: "Я создаю полезные продукты", heroAccent: "и упрощаю сложную работу.",
-    heroLead: "Руководитель в продукте и операциях с практическим опытом в разработке ПО, автоматизации, ритейле, телекоме и международных операциях.",
-    heroPrimary: "Смотреть опыт", heroSecondary: "Сохранить PDF", profileEyebrow: "Украина",
-    profileTitle: "Product & Operations Leader · Software Builder", factYears: "лет профессионального опыта", factTeam: "человек в управляемых командах", factLanguages: "языка сайта",
-    aboutEyebrow: "Профиль", aboutTitle: "Бизнес-мышление с подходом создателя.",
-    aboutP1: "Я работаю на пересечении операционного управления, продуктовой разработки и технологий. Мой опыт включает телеком-инжиниринг, управление международными заказами, руководство в ритейле и предпринимательство.",
-    aboutP2: "Сегодня я также создаю практичные приложения для Android, Windows и веба, совмещая разработку, продуктовое мышление, автоматизацию и внимание к удобству.",
-    quoteText: "Лучший процесс убирает лишнее трение, делает следующий шаг очевидным и продолжает работать, когда всё становится сложнее.",
-    expEyebrow: "Карьера", expTitle: "Опыт на стыке технологий и операций.", projectsEyebrow: "Избранные работы", projectsTitle: "Продукты, которые я создаю и развиваю.",
-    skillsEyebrow: "Компетенции", skillsTitle: "Гибридный набор: управление, продукт и разработка.", stackEyebrow: "Инструменты и стек", stackTitle: "Технологии, которые помогают мне доводить работу до результата.",
-    contactEyebrow: "Контакты", contactTitle: "Есть продуктовая, операционная или техническая задача?", contactText: "Открыт к обсуждению продуктов, операций, автоматизации и разработки ПО.", contactEmail: "Написать мне", footerRole: "Продукт · Операции · Технологии"
-  },
-  uk: {
-    brandRole: "Резюме / Портфоліо", navAbout: "Про мене", navExperience: "Досвід", navProjects: "Проєкти", navSkills: "Навички",
-    heroKicker: "Продукт · Операції · Технології", heroHello: "Я створюю корисні продукти", heroAccent: "і спрощую складну роботу.",
-    heroLead: "Керівник у продукті та операціях із практичним досвідом у розробці ПЗ, автоматизації, ритейлі, телекомі та міжнародних операціях.",
-    heroPrimary: "Переглянути досвід", heroSecondary: "Зберегти PDF", profileEyebrow: "Україна",
-    profileTitle: "Product & Operations Leader · Software Builder", factYears: "років професійного досвіду", factTeam: "людей у керованих командах", factLanguages: "мови сайту",
-    aboutEyebrow: "Профіль", aboutTitle: "Бізнес-мислення з підходом творця.",
-    aboutP1: "Я працюю на перетині операційного управління, продуктової розробки та технологій. Мій досвід охоплює телеком-інжиніринг, управління міжнародними замовленнями, керівництво в ритейлі та підприємництво.",
-    aboutP2: "Сьогодні я також створюю практичні застосунки для Android, Windows і вебу, поєднуючи розробку, продуктове мислення, автоматизацію та увагу до зручності.",
-    quoteText: "Найкращий процес прибирає зайве тертя, робить наступний крок очевидним і продовжує працювати, коли все стає складнішим.",
-    expEyebrow: "Кар'єра", expTitle: "Досвід на перетині технологій та операцій.", projectsEyebrow: "Вибрані роботи", projectsTitle: "Продукти, які я створюю та розвиваю.",
-    skillsEyebrow: "Компетенції", skillsTitle: "Гібридний набір: лідерство, продукт та розробка.", stackEyebrow: "Інструменти та стек", stackTitle: "Технології, які допомагають доводити роботу до результату.",
-    contactEyebrow: "Контакти", contactTitle: "Є продуктова, операційна чи технічна задача?", contactText: "Відкритий до обговорення продуктів, операцій, автоматизації та розробки ПЗ.", contactEmail: "Написати мені", footerRole: "Продукт · Операції · Технології"
-  }
+const I18N={
+ en:{navExperience:'Experience',navProjects:'Projects',navCases:'Case studies',navSkills:'Skills',heroKicker:'Product · Operations · Technology',heroLine1:'I turn complex work',heroLine2:'into clear products and systems.',heroLead:'A hybrid leader with experience across telecom, international operations, retail, entrepreneurship and hands-on software development.',modeRecruiter:'Recruiter',modeDeveloper:'Developer',modeManagement:'Management',heroPrimary:'Explore selected work',heroCV:'Download CV',openText:'Open to selected opportunities',profileTitle:'Product & Operations Leader · Software Builder',factYears:'years of experience',factTeam:'people led',factLang:'languages',aboutEyebrow:'Profile',aboutTitle:"Business judgement with a builder's instinct.",aboutP1:'I work at the intersection of operations, product development and technology — translating messy real-world constraints into systems people can actually use.',aboutP2:'My background spans telecom engineering, international order management, retail leadership and entrepreneurship. Today I also build Android, Windows and web products with a focus on automation, privacy and accessibility.',quoteText:'Remove friction. Make the next action obvious. Keep the system resilient when complexity arrives.',expEyebrow:'Career',expTitle:'Experience across technology and operations.',projectsEyebrow:'Selected work',projectsTitle:'Products designed to solve concrete problems.',casesEyebrow:'Case studies',casesTitle:'How I approach product and engineering constraints.',skillsEyebrow:'Capabilities',skillsTitle:'Leadership, product and engineering in one operating system.',nowEyebrow:'Currently building',nowTitle:'What is moving right now.',contactEyebrow:'Contact',contactTitle:'A useful conversation can start with one clear problem.',contactText:'Open to product, operations, automation and software opportunities across remote and EU-facing teams.',contactEmail:'Email me',shareResume:'Share resume',addContact:'Add contact',qrTitle:'Resume QR',qrText:'Scan to open the latest version of this portfolio.'},
+ pl:{navExperience:'Doświadczenie',navProjects:'Projekty',navCases:'Case studies',navSkills:'Kompetencje',heroKicker:'Produkt · Operacje · Technologia',heroLine1:'Zmieniam złożoną pracę',heroLine2:'w jasne produkty i systemy.',heroLead:'Łączę doświadczenie w telekomunikacji, operacjach międzynarodowych, handlu, przedsiębiorczości i praktycznym tworzeniu oprogramowania.',modeRecruiter:'Rekruter',modeDeveloper:'Developer',modeManagement:'Zarządzanie',heroPrimary:'Zobacz wybrane projekty',heroCV:'Pobierz CV',openText:'Otwarty na wybrane możliwości',profileTitle:'Product & Operations Leader · Software Builder',factYears:'lat doświadczenia',factTeam:'osób w zespołach',factLang:'języki',aboutEyebrow:'Profil',aboutTitle:'Myślenie biznesowe z instynktem twórcy.',aboutP1:'Pracuję na styku operacji, rozwoju produktu i technologii — zamieniając realne ograniczenia w systemy, z których ludzie faktycznie chcą korzystać.',aboutP2:'Moje doświadczenie obejmuje telekomunikację, zamówienia międzynarodowe, retail i przedsiębiorczość. Dziś tworzę też produkty na Androida, Windows i web z naciskiem na automatyzację, prywatność i dostępność.',quoteText:'Usuń tarcie. Pokaż kolejny krok. Zadbaj, by system działał również wtedy, gdy rośnie złożoność.',expEyebrow:'Kariera',expTitle:'Doświadczenie w technologii i operacjach.',projectsEyebrow:'Wybrane projekty',projectsTitle:'Produkty rozwiązujące konkretne problemy.',casesEyebrow:'Case studies',casesTitle:'Jak podchodzę do ograniczeń produktowych i technicznych.',skillsEyebrow:'Kompetencje',skillsTitle:'Przywództwo, produkt i inżynieria w jednym systemie.',nowEyebrow:'Aktualnie tworzę',nowTitle:'To, nad czym obecnie pracuję.',contactEyebrow:'Kontakt',contactTitle:'Dobra rozmowa może zacząć się od jednego konkretnego problemu.',contactText:'Jestem otwarty na role i projekty związane z produktem, operacjami, automatyzacją i software w zespołach zdalnych oraz europejskich.',contactEmail:'Napisz do mnie',shareResume:'Udostępnij CV',addContact:'Dodaj kontakt',qrTitle:'QR CV',qrText:'Zeskanuj, aby otworzyć najnowszą wersję portfolio.'},
+ ru:{navExperience:'Опыт',navProjects:'Проекты',navCases:'Кейсы',navSkills:'Навыки',heroKicker:'Продукт · Операции · Технологии',heroLine1:'Я превращаю сложную работу',heroLine2:'в понятные продукты и системы.',heroLead:'Совмещаю опыт в телекоме, международных операциях, ритейле, предпринимательстве и практической разработке ПО.',modeRecruiter:'Рекрутер',modeDeveloper:'Разработка',modeManagement:'Управление',heroPrimary:'Смотреть проекты',heroCV:'Скачать CV',openText:'Открыт к интересным предложениям',profileTitle:'Product & Operations Leader · Software Builder',factYears:'лет опыта',factTeam:'человек в командах',factLang:'языка',aboutEyebrow:'Профиль',aboutTitle:'Бизнес-мышление с инстинктом создателя.',aboutP1:'Я работаю на пересечении операций, продукта и технологий — превращая реальные ограничения в системы, которыми удобно пользоваться.',aboutP2:'Мой опыт включает телеком, международные заказы, ритейл и предпринимательство. Сегодня я также создаю Android, Windows и web-продукты с фокусом на автоматизацию, приватность и accessibility.',quoteText:'Убирать трение. Делать следующий шаг очевидным. Строить системы, которые не ломаются при росте сложности.',expEyebrow:'Карьера',expTitle:'Опыт на стыке технологий и операций.',projectsEyebrow:'Избранные работы',projectsTitle:'Продукты для решения конкретных задач.',casesEyebrow:'Кейсы',casesTitle:'Как я работаю с продуктовыми и техническими ограничениями.',skillsEyebrow:'Компетенции',skillsTitle:'Управление, продукт и разработка в одной системе.',nowEyebrow:'Сейчас создаю',nowTitle:'Что развивается прямо сейчас.',contactEyebrow:'Контакты',contactTitle:'Хороший разговор может начаться с одной конкретной задачи.',contactText:'Открыт к продуктовым, операционным, automation и software-возможностям в удалённых и европейских командах.',contactEmail:'Написать',shareResume:'Поделиться резюме',addContact:'Добавить контакт',qrTitle:'QR резюме',qrText:'Откройте актуальную версию портфолио по QR-коду.'},
+ uk:{navExperience:'Досвід',navProjects:'Проєкти',navCases:'Кейси',navSkills:'Навички',heroKicker:'Продукт · Операції · Технології',heroLine1:'Я перетворюю складну роботу',heroLine2:'на зрозумілі продукти й системи.',heroLead:'Поєдную досвід у телекомі, міжнародних операціях, ритейлі, підприємництві та практичній розробці ПЗ.',modeRecruiter:'Рекрутер',modeDeveloper:'Розробка',modeManagement:'Управління',heroPrimary:'Переглянути проєкти',heroCV:'Завантажити CV',openText:'Відкритий до цікавих можливостей',profileTitle:'Product & Operations Leader · Software Builder',factYears:'років досвіду',factTeam:'людей у командах',factLang:'мови',aboutEyebrow:'Профіль',aboutTitle:'Бізнес-мислення з інстинктом творця.',aboutP1:'Я працюю на перетині операцій, продукту й технологій — перетворюючи реальні обмеження на системи, якими зручно користуватися.',aboutP2:'Мій досвід охоплює телеком, міжнародні замовлення, ритейл і підприємництво. Сьогодні я також створюю Android, Windows та web-продукти з фокусом на автоматизацію, приватність і доступність.',quoteText:'Прибирати тертя. Робити наступний крок очевидним. Будувати системи, що витримують зростання складності.',expEyebrow:"Кар'єра",expTitle:'Досвід на перетині технологій та операцій.',projectsEyebrow:'Вибрані роботи',projectsTitle:'Продукти для вирішення конкретних задач.',casesEyebrow:'Кейси',casesTitle:'Як я працюю з продуктовими й технічними обмеженнями.',skillsEyebrow:'Компетенції',skillsTitle:'Лідерство, продукт і розробка в одній системі.',nowEyebrow:'Зараз створюю',nowTitle:'Що розвивається просто зараз.',contactEyebrow:'Контакти',contactTitle:'Хороша розмова може початися з однієї конкретної задачі.',contactText:'Відкритий до продуктових, операційних, automation та software-можливостей у віддалених і європейських командах.',contactEmail:'Написати',shareResume:'Поділитися резюме',addContact:'Додати контакт',qrTitle:'QR резюме',qrText:'Відскануйте, щоб відкрити актуальну версію портфоліо.'}
 };
-
-const experience = {
-  en: [
-    ["2022 — Now", "LLC Brillkoff", "Owner / Business Operations", "Business ownership, operations, commercial decisions, customer workflows and day-to-day execution."],
-    ["2022 — 2023", "ALLO", "Retail Manager", "Retail operations, sales performance, customer experience and team coordination."],
-    ["2018 — 2021", "TME", "Head of International Orders", "Led international order operations, coordinated cross-border workflows and managed a team."],
-    ["2015 — 2018", "DataGroup", "Telecom Engineer", "Telecommunications engineering, network operations, diagnostics and technical support."]
-  ],
-  pl: [
-    ["2022 — obecnie", "LLC Brillkoff", "Właściciel / Operacje biznesowe", "Prowadzenie firmy, operacje, decyzje handlowe, procesy klienta i bieżąca realizacja."],
-    ["2022 — 2023", "ALLO", "Kierownik sprzedaży detalicznej", "Operacje retail, wyniki sprzedaży, doświadczenie klienta i koordynacja zespołu."],
-    ["2018 — 2021", "TME", "Head of International Orders", "Zarządzanie operacjami zamówień międzynarodowych, procesami transgranicznymi i zespołem."],
-    ["2015 — 2018", "DataGroup", "Inżynier telekomunikacji", "Inżynieria telekomunikacyjna, operacje sieciowe, diagnostyka i wsparcie techniczne."]
-  ],
-  ru: [
-    ["2022 — сейчас", "LLC Brillkoff", "Владелец / Business Operations", "Управление бизнесом, операционные процессы, коммерческие решения, работа с клиентскими процессами и ежедневное исполнение."],
-    ["2022 — 2023", "ALLO", "Менеджер розничной торговли", "Операции в ритейле, продажи, клиентский опыт и координация команды."],
-    ["2018 — 2021", "TME", "Руководитель международных заказов", "Управление международными заказами, координация трансграничных процессов и руководство командой."],
-    ["2015 — 2018", "DataGroup", "Телеком-инженер", "Телекоммуникации, сетевые операции, диагностика и техническая поддержка."]
-  ],
-  uk: [
-    ["2022 — зараз", "LLC Brillkoff", "Власник / Business Operations", "Управління бізнесом, операційні процеси, комерційні рішення, клієнтські процеси та щоденне виконання."],
-    ["2022 — 2023", "ALLO", "Менеджер роздрібної торгівлі", "Операції в ритейлі, продажі, клієнтський досвід і координація команди."],
-    ["2018 — 2021", "TME", "Керівник міжнародних замовлень", "Управління міжнародними замовленнями, координація транскордонних процесів і керівництво командою."],
-    ["2015 — 2018", "DataGroup", "Телеком-інженер", "Телекомунікації, мережеві операції, діагностика та технічна підтримка."]
-  ]
-};
-
-const projects = {
-  en: [
-    ["ClearUp", "Privacy-first Android storage cleaner with transparent scan rules, local processing and safe privileged actions.", ["Android", "Kotlin", "Compose", "Shizuku / Root"], "https://github.com/kostiantynbryl/ClearUp"],
-    ["CutFlow Batch", "Windows batch video trimming utility built around Python, PySide6, FFmpeg and FFprobe.", ["Windows", "Python", "PySide6", "FFmpeg"], "https://github.com/kostiantynbryl/CutFlow-Batch"],
-    ["LumaBay", "A product project in the Norvexa ecosystem focused on practical end-user workflows and polished UX.", ["Product", "UX", "Web"], "https://github.com/kostiantynbryl/LumaBay"],
-    ["BrylTab Bouncer Glass", "Android lock-screen customization project for a rooted Doogee U10 / Android 16 setup.", ["Android", "LSPosed", "System UI"], "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass"],
-    ["Norvexa OneStep", "A Norvexa Android product focused on making recurring tasks simpler and faster.", ["Android", "Product", "Automation"], "https://github.com/kostiantynbryl/Norvexa-OneStep"],
-    ["Norvexa Reader", "Reader application concept within the Norvexa product family.", ["Android", "Reader", "UX"], "https://github.com/kostiantynbryl/Norvexa-Reader"]
-  ],
-  pl: [
-    ["ClearUp", "Androidowy cleaner pamięci z podejściem privacy-first, lokalnym przetwarzaniem i bezpiecznymi akcjami uprzywilejowanymi.", ["Android", "Kotlin", "Compose", "Shizuku / Root"], "https://github.com/kostiantynbryl/ClearUp"],
-    ["CutFlow Batch", "Narzędzie Windows do wsadowego przycinania wideo oparte na Pythonie, PySide6, FFmpeg i FFprobe.", ["Windows", "Python", "PySide6", "FFmpeg"], "https://github.com/kostiantynbryl/CutFlow-Batch"],
-    ["LumaBay", "Projekt produktowy w ekosystemie Norvexa skoncentrowany na praktycznych workflow i dopracowanym UX.", ["Product", "UX", "Web"], "https://github.com/kostiantynbryl/LumaBay"],
-    ["BrylTab Bouncer Glass", "Projekt personalizacji ekranu blokady Android dla zrootowanego Doogee U10 z Androidem 16.", ["Android", "LSPosed", "System UI"], "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass"],
-    ["Norvexa OneStep", "Produkt Android z rodziny Norvexa upraszczający powtarzalne czynności.", ["Android", "Product", "Automation"], "https://github.com/kostiantynbryl/Norvexa-OneStep"],
-    ["Norvexa Reader", "Koncepcja aplikacji czytnika w rodzinie produktów Norvexa.", ["Android", "Reader", "UX"], "https://github.com/kostiantynbryl/Norvexa-Reader"]
-  ],
-  ru: [
-    ["ClearUp", "Privacy-first Android-клинер с локальной обработкой, прозрачными правилами сканирования и безопасными привилегированными действиями.", ["Android", "Kotlin", "Compose", "Shizuku / Root"], "https://github.com/kostiantynbryl/ClearUp"],
-    ["CutFlow Batch", "Windows-утилита для пакетной обрезки видео на Python, PySide6, FFmpeg и FFprobe.", ["Windows", "Python", "PySide6", "FFmpeg"], "https://github.com/kostiantynbryl/CutFlow-Batch"],
-    ["LumaBay", "Продуктовый проект экосистемы Norvexa с фокусом на практичные сценарии и качественный UX.", ["Product", "UX", "Web"], "https://github.com/kostiantynbryl/LumaBay"],
-    ["BrylTab Bouncer Glass", "Проект кастомизации экрана блокировки Android для рутованного Doogee U10 на Android 16.", ["Android", "LSPosed", "System UI"], "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass"],
-    ["Norvexa OneStep", "Android-продукт Norvexa для упрощения повторяющихся действий.", ["Android", "Product", "Automation"], "https://github.com/kostiantynbryl/Norvexa-OneStep"],
-    ["Norvexa Reader", "Концепт приложения-читалки в линейке продуктов Norvexa.", ["Android", "Reader", "UX"], "https://github.com/kostiantynbryl/Norvexa-Reader"]
-  ],
-  uk: [
-    ["ClearUp", "Privacy-first Android-клінер із локальною обробкою, прозорими правилами сканування та безпечними привілейованими діями.", ["Android", "Kotlin", "Compose", "Shizuku / Root"], "https://github.com/kostiantynbryl/ClearUp"],
-    ["CutFlow Batch", "Windows-утиліта для пакетного обрізання відео на Python, PySide6, FFmpeg та FFprobe.", ["Windows", "Python", "PySide6", "FFmpeg"], "https://github.com/kostiantynbryl/CutFlow-Batch"],
-    ["LumaBay", "Продуктовий проєкт екосистеми Norvexa з фокусом на практичні сценарії та якісний UX.", ["Product", "UX", "Web"], "https://github.com/kostiantynbryl/LumaBay"],
-    ["BrylTab Bouncer Glass", "Проєкт кастомізації екрана блокування Android для рутованого Doogee U10 на Android 16.", ["Android", "LSPosed", "System UI"], "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass"],
-    ["Norvexa OneStep", "Android-продукт Norvexa для спрощення повторюваних дій.", ["Android", "Product", "Automation"], "https://github.com/kostiantynbryl/Norvexa-OneStep"],
-    ["Norvexa Reader", "Концепт застосунку-читалки в лінійці продуктів Norvexa.", ["Android", "Reader", "UX"], "https://github.com/kostiantynbryl/Norvexa-Reader"]
-  ]
-};
-
-const skills = {
-  en: [
-    ["01", "Operations & Leadership", "Team leadership, process design, business operations, prioritization and execution."],
-    ["02", "Product Development", "From problem definition and UX thinking to implementation, iteration and release planning."],
-    ["03", "Software & Automation", "Android, Windows and web projects, workflow automation, API integrations and AI-assisted development."],
-    ["04", "Data & Business Systems", "Excel / Power Query, Power BI, CRM, ERP, WMS, POS and operational reporting."],
-    ["05", "Networks & Technical Ops", "MikroTik, Wireshark, SSH, VPN, diagnostics and telecom operations."],
-    ["06", "Commercial & Customer", "International orders, retail, customer experience, sales processes and partner coordination."]
-  ],
-  pl: [
-    ["01", "Operacje i przywództwo", "Zarządzanie zespołem, projektowanie procesów, operacje biznesowe, priorytetyzacja i realizacja."],
-    ["02", "Rozwój produktu", "Od definicji problemu i UX po wdrożenie, iteracje i planowanie wydań."],
-    ["03", "Software i automatyzacja", "Projekty Android, Windows i web, automatyzacja workflow, integracje API i rozwój wspierany przez AI."],
-    ["04", "Dane i systemy biznesowe", "Excel / Power Query, Power BI, CRM, ERP, WMS, POS i raportowanie operacyjne."],
-    ["05", "Sieci i operacje techniczne", "MikroTik, Wireshark, SSH, VPN, diagnostyka i operacje telekomunikacyjne."],
-    ["06", "Sprzedaż i klient", "Zamówienia międzynarodowe, retail, customer experience, procesy sprzedażowe i koordynacja partnerów."]
-  ],
-  ru: [
-    ["01", "Операции и лидерство", "Управление командой, проектирование процессов, бизнес-операции, приоритизация и исполнение."],
-    ["02", "Развитие продукта", "От постановки проблемы и UX до реализации, итераций и планирования релизов."],
-    ["03", "Разработка и автоматизация", "Проекты для Android, Windows и web, автоматизация процессов, API-интеграции и AI-assisted development."],
-    ["04", "Данные и бизнес-системы", "Excel / Power Query, Power BI, CRM, ERP, WMS, POS и операционная отчётность."],
-    ["05", "Сети и технические операции", "MikroTik, Wireshark, SSH, VPN, диагностика и телеком-операции."],
-    ["06", "Коммерция и клиентский опыт", "Международные заказы, ритейл, customer experience, продажи и координация партнёров."]
-  ],
-  uk: [
-    ["01", "Операції та лідерство", "Управління командою, проєктування процесів, бізнес-операції, пріоритизація та виконання."],
-    ["02", "Розвиток продукту", "Від постановки проблеми та UX до реалізації, ітерацій і планування релізів."],
-    ["03", "Розробка й автоматизація", "Проєкти для Android, Windows та web, автоматизація процесів, API-інтеграції й AI-assisted development."],
-    ["04", "Дані та бізнес-системи", "Excel / Power Query, Power BI, CRM, ERP, WMS, POS та операційна звітність."],
-    ["05", "Мережі та технічні операції", "MikroTik, Wireshark, SSH, VPN, діагностика та телеком-операції."],
-    ["06", "Комерція та клієнтський досвід", "Міжнародні замовлення, ритейл, customer experience, продажі та координація партнерів."]
-  ]
-};
-
-const tools = [
-  "Android", "Kotlin", "Jetpack Compose", "Python", "PySide6", "FFmpeg", "HTML / CSS / JavaScript", "REST APIs", "Postman", "OpenAI API",
-  "Git / GitHub", "Magisk", "LSPosed", "Shizuku", "Linux / WSL", "Excel", "Power Query", "Power BI", "SAP S/4HANA", "1C", "Salesforce", "HubSpot",
-  "ERP / WMS / POS", "MikroTik", "Wireshark", "SSH / VPN", "Figma", "Photoshop", "Canva", "Trello", "Make", "Zapier"
-];
-
-const doc = document.documentElement;
-const langButtons = [...document.querySelectorAll("[data-lang]")];
-const themeToggle = document.getElementById("themeToggle");
-const printButton = document.getElementById("printButton");
-
-function renderExperience(lang) {
-  const target = document.getElementById("experienceList");
-  target.innerHTML = experience[lang].map(([period, company, role, desc]) => `
-    <article class="timeline-item reveal">
-      <div class="timeline-period">${period}</div>
-      <div class="timeline-main"><h3>${company}</h3><p>${role}</p></div>
-      <p class="timeline-desc">${desc}</p>
-    </article>
-  `).join("");
-}
-
-function renderProjects(lang) {
-  const target = document.getElementById("projectsGrid");
-  const label = { en: "View repository", pl: "Zobacz repozytorium", ru: "Открыть репозиторий", uk: "Відкрити репозиторій" }[lang];
-  target.innerHTML = projects[lang].map(([name, desc, tags, url], index) => `
-    <article class="project-card reveal">
-      <div class="project-glow" aria-hidden="true"></div>
-      <span class="project-number">PROJECT / ${String(index + 1).padStart(2, "0")}</span>
-      <h3>${name}</h3>
-      <p>${desc}</p>
-      <div class="project-meta">${tags.map(tag => `<span>${tag}</span>`).join("")}</div>
-      <a class="project-link" href="${url}" target="_blank" rel="noreferrer">${label} ↗</a>
-    </article>
-  `).join("");
-}
-
-function renderSkills(lang) {
-  document.getElementById("skillsGrid").innerHTML = skills[lang].map(([icon, name, desc]) => `
-    <article class="skill-card reveal"><div class="skill-icon">${icon}</div><h3>${name}</h3><p>${desc}</p></article>
-  `).join("");
-}
-
-function renderTools() {
-  document.getElementById("toolCloud").innerHTML = tools.map(tool => `<span class="tool-chip">${tool}</span>`).join("");
-}
-
-function applyLanguage(lang) {
-  if (!translations[lang]) lang = "en";
-  localStorage.setItem("resume-language", lang);
-  doc.lang = lang === "uk" ? "uk" : lang;
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    if (translations[lang][key]) el.textContent = translations[lang][key];
-  });
-  langButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.lang === lang));
-  renderExperience(lang); renderProjects(lang); renderSkills(lang); observeReveals();
-}
-
-function applyTheme(theme) {
-  doc.dataset.theme = theme;
-  localStorage.setItem("resume-theme", theme);
-}
-
-function observeReveals() {
-  const items = document.querySelectorAll(".reveal:not(.visible)");
-  if (!("IntersectionObserver" in window)) { items.forEach(item => item.classList.add("visible")); return; }
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
-    });
-  }, { threshold: .12 });
-  items.forEach(item => observer.observe(item));
-}
-
-langButtons.forEach(btn => btn.addEventListener("click", () => applyLanguage(btn.dataset.lang)));
-themeToggle.addEventListener("click", () => applyTheme(doc.dataset.theme === "dark" ? "light" : "dark"));
-printButton.addEventListener("click", () => window.print());
-
-const savedTheme = localStorage.getItem("resume-theme");
-const systemLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
-applyTheme(savedTheme || (systemLight ? "light" : "dark"));
-renderTools();
-applyLanguage(localStorage.getItem("resume-language") || "en");
-observeReveals();
+const EXPERIENCE={en:[['2022 — Now','LLC Brillkoff','Owner / Business Operations','Business ownership, commercial decisions, customer workflows, operational execution and process improvement.'],['2022 — 2023','ALLO','Retail Manager','Retail operations, sales performance, customer experience and team coordination.'],['2018 — 2021','TME','Head of International Orders','Led international order operations, cross-border workflows and a team in a high-volume environment.'],['2015 — 2018','DataGroup','Telecom Engineer','Network operations, diagnostics, troubleshooting and technical support.']],pl:[['2022 — obecnie','LLC Brillkoff','Właściciel / Operacje biznesowe','Prowadzenie firmy, decyzje handlowe, procesy klienta i usprawnianie operacji.'],['2022 — 2023','ALLO','Retail Manager','Operacje retail, wyniki sprzedaży, doświadczenie klienta i koordynacja zespołu.'],['2018 — 2021','TME','Head of International Orders','Zarządzanie zamówieniami międzynarodowymi, procesami transgranicznymi i zespołem.'],['2015 — 2018','DataGroup','Inżynier telekomunikacji','Operacje sieciowe, diagnostyka, troubleshooting i wsparcie techniczne.']],ru:[['2022 — сейчас','LLC Brillkoff','Владелец / Business Operations','Управление бизнесом, коммерческие решения, клиентские процессы и улучшение операций.'],['2022 — 2023','ALLO','Менеджер розничной торговли','Ритейл-операции, продажи, клиентский опыт и координация команды.'],['2018 — 2021','TME','Руководитель международных заказов','Международные заказы, трансграничные процессы и руководство командой.'],['2015 — 2018','DataGroup','Телеком-инженер','Сетевые операции, диагностика, troubleshooting и техническая поддержка.']],uk:[['2022 — зараз','LLC Brillkoff','Власник / Business Operations','Управління бізнесом, комерційні рішення, клієнтські процеси та покращення операцій.'],['2022 — 2023','ALLO','Менеджер роздрібної торгівлі','Ритейл-операції, продажі, клієнтський досвід і координація команди.'],['2018 — 2021','TME','Керівник міжнародних замовлень','Міжнародні замовлення, транскордонні процеси та керівництво командою.'],['2015 — 2018','DataGroup','Телеком-інженер','Мережеві операції, діагностика, troubleshooting і технічна підтримка.']]};
+const PROJECTS=[{name:'ClearUp',mark:'C',cat:['Android','Accessibility','Utilities'],status:'Active',desc:'Privacy-first Android storage cleaner with safe scan rules, Root/Shizuku paths and explicit user confirmation.',stack:['Kotlin','Jetpack Compose','Material 3','WorkManager'],url:'https://github.com/kostiantynbryl/ClearUp',skills:['Kotlin','Android','Accessibility','Product']},{name:'Norvexa OneStep',mark:'1',cat:['Android','Productivity','Accessibility'],status:'MVP',desc:'Offline-first Android goal planner that turns a large goal into one clear next action.',stack:['Kotlin','Compose','DataStore','WorkManager'],url:'https://github.com/kostiantynbryl/Norvexa-OneStep',skills:['Kotlin','Android','Accessibility','Product']},{name:'CutFlow Batch',mark:'▶',cat:['Windows','Utilities'],status:'Active',desc:'Batch video trimming desktop tool with FFmpeg stream-copy first and automatic H.264/AAC fallback.',stack:['Python','PySide6','FFmpeg','PyInstaller'],url:'https://github.com/kostiantynbryl/CutFlow-Batch',skills:['Python','Windows','Product']},{name:'Luma Bay',mark:'L',cat:['Game','Mobile'],status:'Alpha',desc:'Commercial mobile Match-3 restoration game currently targeting an early Unity alpha.',stack:['Unity','C#','Mobile'],url:'https://github.com/kostiantynbryl/LumaBay',skills:['Product','Mobile']},{name:'BrylTab Bouncer Glass',mark:'B',cat:['Android','Accessibility','System'],status:'Active',desc:'Android lock-screen / SystemUI customization work focused on clarity, polish and behavior.',stack:['Android','LSPosed','SystemUI'],url:'https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass',skills:['Android','Accessibility']},{name:'Norvexa Reader',mark:'R',cat:['Android','Productivity'],status:'Concept',desc:'Reader-focused product direction inside the Norvexa application family.',stack:['Android','Product Design'],url:'https://github.com/kostiantynbryl/Norvexa-Reader',skills:['Android','Product']}];
+const CASES=[{n:'CASE / 01',name:'ClearUp',problem:'Storage-cleaner apps often trade safety and privacy for automation.',constraint:'Android storage restrictions differ by version; privileged paths must never become arbitrary shell access.',solution:'Layered Root → Shizuku → consented Accessibility → standard mode, with strict allowlists and deletion-time revalidation.',result:'A privacy-first foundation with explicit risk classes, local processing and no silent media deletion.'},{n:'CASE / 02',name:'OneStep',problem:'Goal planners often show too much structure when the user needs one executable action.',constraint:'Offline-first, no mandatory account, four UI languages and accessibility-friendly controls.',solution:'One active goal, one next step, local persistence, reminders, focus timer and editable stages behind the primary action.',result:'A complete local MVP foundation designed around cognitive simplicity rather than feature density.'},{n:'CASE / 03',name:'CutFlow Batch',problem:'Trimming the same intro/outro from many videos manually wastes time.',constraint:'Fast path must avoid re-encoding but still recover when codecs or containers are incompatible.',solution:'FFprobe duration check, FFmpeg stream copy first, then automatic H.264/AAC fallback in a non-blocking desktop queue.',result:'A focused Windows utility with batch processing, cancellation, logs and standalone packaging.'}];
+const SKILLS=[['Product','Core','Turning constraints into clear scope, flows and priorities.',['Product']],['Operations','Core','Process design, execution, quality and cross-functional coordination.',['Product']],['Leadership','Core','Team coordination, ownership and decision-making.',['Management']],['Automation','Advanced','Reducing repetitive work through scripts, APIs and workflow tools.',['Python','Android']],['Software','Advanced','Hands-on Android, Windows and web product building.',['Kotlin','Python','Android']],['Accessibility','Advanced','Accessible interaction patterns, TalkBack-oriented UI and safe automation.',['Accessibility','Android']],['Data & CRM','Advanced','Power BI, Excel/Power Query, SAP, Salesforce, HubSpot.',['Product']],['Infrastructure','Working knowledge','Linux, networking, MikroTik, Wireshark, SSH/VPN.',['Android']]];
+const STACK={Development:['Kotlin','Python','JavaScript','TypeScript','HTML/CSS','Java','C/C++','SQL','REST API','Git/GitHub','Next.js','NestJS'],Android:['Android','Jetpack Compose','Material 3','ADB','Magisk','LSPosed','Shizuku','WorkManager'],Business:['SAP S/4HANA','Salesforce','HubSpot','1C','ERP/WMS/POS','Trello'],Data:['Power BI','Excel Power Query','PostgreSQL','Redis','Google Analytics'],AI:['OpenAI API','Prompt Engineering','Postman','Zapier','Make'],Design:['Figma','Photoshop','Canva'],Infrastructure:['Linux','MikroTik','Wireshark','SSH','VPN']};
+const NOW=[['ACTIVE','ClearUp','Building a safer Android cleanup workflow with privileged backends and strict safety boundaries.'],['ACTIVE','Norvexa OneStep','Refining an offline-first goal system around one clear next action.'],['ACTIVE','My Resume','Turning this portfolio into a role-targeted, accessible personal brand surface.']];
+let lang=(new URLSearchParams(location.search).get('lang')||localStorage.getItem('resume-lang')||({pl:'pl',uk:'uk',ru:'ru'}[navigator.language.slice(0,2)]||'en'));if(!I18N[lang])lang='en';let view=(new URLSearchParams(location.search).get('view')||localStorage.getItem('resume-view')||'recruiter');if(!['recruiter','developer','management'].includes(view))view='recruiter';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function applyLang(){document.documentElement.lang=lang;$$('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(I18N[lang][k])el.textContent=I18N[lang][k]});$$('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));renderExperience();localStorage.setItem('resume-lang',lang);const u=new URL(location);u.searchParams.set('lang',lang);history.replaceState({},'',u)}
+function applyView(){document.documentElement.dataset.view=view;$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));localStorage.setItem('resume-view',view);const u=new URL(location);u.searchParams.set('view',view);history.replaceState({},'',u);if(view==='developer'){$('[data-i18n="heroLine1"]').textContent=lang==='ru'?'Я превращаю идеи':lang==='uk'?'Я перетворюю ідеї':lang==='pl'?'Zmieniam pomysły':'I turn ideas';$('[data-i18n="heroLine2"]').textContent=lang==='ru'?'в работающий софт.':lang==='uk'?'на робочий софт.':lang==='pl'?'w działające oprogramowanie.':'into working software.'}else if(view==='management'){$('[data-i18n="heroLine1"]').textContent=lang==='ru'?'Я выстраиваю процессы':lang==='uk'?'Я вибудовую процеси':lang==='pl'?'Buduję procesy':'I build operating systems';$('[data-i18n="heroLine2"]').textContent=lang==='ru'?'которые масштабируются.':lang==='uk'?'які масштабуються.':lang==='pl'?'które skalują się.':'that scale with the work.'}else{applyLang()}}
+function renderExperience(){$('#experienceList').innerHTML=EXPERIENCE[lang].map(x=>`<article class="timeline-item"><div class="timeline-period">${x[0]}</div><div class="timeline-main"><h3>${x[1]}</h3><p>${x[2]}</p></div><p class="timeline-desc">${x[3]}</p></article>`).join('')}
+function renderProjects(filter='All'){$('#projectsGrid').innerHTML=PROJECTS.filter(p=>filter==='All'||p.cat.includes(filter)).map((p,i)=>`<article class="project-card ${i%4===0?'featured':i%4===1?'compact':''}" data-skills="${p.skills.join('|')}"><div class="project-visual" data-mark="${p.mark}"><span>NORVEXA / ${p.cat[0].toUpperCase()}</span></div><div class="project-topline"><span class="project-index">0${i+1}</span><span class="project-status">${p.status}</span></div><h3>${p.name}</h3><p>${p.desc}</p><div class="project-meta">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><a class="project-link" href="${p.url}" target="_blank" rel="noreferrer">View project ↗</a></article>`).join('')}
+function renderFilters(){const f=['All',...new Set(PROJECTS.flatMap(p=>p.cat))];$('#projectFilters').innerHTML=f.map((x,i)=>`<button class="${i===0?'active':''}" data-filter="${x}">${x}</button>`).join('');$$('[data-filter]').forEach(b=>b.onclick=()=>{$$('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderProjects(b.dataset.filter)})}
+function renderCases(){$('#casesGrid').innerHTML=CASES.map(c=>`<article class="case-card"><small>${c.n}</small><h3>${c.name}</h3>${[['Problem',c.problem],['Constraint',c.constraint],['Solution',c.solution],['Result',c.result]].map(x=>`<div class="case-block"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</article>`).join('')}
+function renderSkills(){$('#skillsGrid').innerHTML=SKILLS.map(s=>`<button class="skill-card" data-links="${s[3].join('|')}"><span class="skill-level">${s[1]}</span><h3>${s[0]}</h3><p>${s[2]}</p></button>`).join('');$$('.skill-card').forEach(b=>b.onclick=()=>highlightProjects(b.dataset.links.split('|')))}
+function renderStack(cat='Development'){$('#stackTabs').innerHTML=Object.keys(STACK).map(x=>`<button class="${x===cat?'active':''}" data-stack="${x}">${x}</button>`).join('');$('#toolCloud').innerHTML=STACK[cat].map(x=>`<button data-tool="${x}">${x}</button>`).join('');$$('[data-stack]').forEach(b=>b.onclick=()=>renderStack(b.dataset.stack));$$('[data-tool]').forEach(b=>b.onclick=()=>highlightProjects([b.dataset.tool]))}
+function highlightProjects(keys){const cards=$$('.project-card');cards.forEach(c=>c.classList.remove('skill-match'));let n=0;cards.forEach(c=>{if(keys.some(k=>c.dataset.skills.includes(k))){c.classList.add('skill-match');n++}});if(n){$('#projects').scrollIntoView({behavior:'smooth'});toast(`${n} related project${n>1?'s':''}`)}else toast('No direct project match yet')}
+function renderNow(){$('#nowGrid').innerHTML=NOW.map(n=>`<article class="now-card"><span>${n[0]}</span><h3>${n[1]}</h3><p>${n[2]}</p></article>`).join('')}
+async function githubStats(){try{const r=await fetch('https://api.github.com/users/kostiantynbryl/repos?per_page=100&type=owner&sort=updated');if(!r.ok)throw 0;const a=await r.json();const pub=a.filter(x=>!x.fork);const stars=pub.reduce((s,x)=>s+x.stargazers_count,0);$('#githubStat').textContent=`GitHub / ${pub.length} public repos · ${stars} stars`}catch{$('#githubStat').textContent='GitHub / live data unavailable'}}
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>el.classList.remove('show'),2200)}
+function commands(){return[{t:'Experience',a:()=>$('#experience').scrollIntoView({behavior:'smooth'})},{t:'Projects',a:()=>$('#projects').scrollIntoView({behavior:'smooth'})},{t:'Case studies',a:()=>$('#cases').scrollIntoView({behavior:'smooth'})},{t:'Download English CV',a:()=>location.href='cv/Kostiantyn_Bryl_CV_EN.pdf'},{t:'Open GitHub',a:()=>open('https://github.com/kostiantynbryl','_blank')},{t:'Open LinkedIn',a:()=>open('https://www.linkedin.com/in/kostiantyn-bryl97/','_blank')},{t:'Recruiter mode',a:()=>{view='recruiter';applyView()}},{t:'Developer mode',a:()=>{view='developer';applyView()}},{t:'Management mode',a:()=>{view='management';applyView()}},...PROJECTS.map(p=>({t:p.name,a:()=>open(p.url,'_blank')})),...Object.values(STACK).flat().map(s=>({t:s,a:()=>highlightProjects([s])}))]}
+function openPalette(){const d=$('#commandPalette');d.showModal();$('#cmdInput').value='';renderCmd('');setTimeout(()=>$('#cmdInput').focus(),20)}function renderCmd(q){q=q.toLowerCase().trim();let list=commands().filter(x=>x.t.toLowerCase().includes(q)).slice(0,12);$('#cmdResults').innerHTML=list.map((x,i)=>`<button type="button" class="cmd-item ${i===0?'active':''}" data-ci="${i}"><span>${x.t}</span><small>↵</small></button>`).join('');$$('[data-ci]').forEach(b=>b.onclick=()=>{list[+b.dataset.ci].a();$('#commandPalette').close()});window.__cmdList=list}
+function matrixEgg(){const el=$('#matrixLayer');el.classList.add('active');toast('NORVEXA // MATRIX MODE');setTimeout(()=>el.classList.remove('active'),5000)}function terminalEgg(){const d=$('#commandPalette');d.showModal();$('#cmdInput').value='whoami';$('#cmdResults').innerHTML='<div style="padding:18px;font:12px monospace;color:var(--cyan)">whoami → Kostiantyn Bryl<br>status → building useful things<br>lab → NORVEXA</div>'}
+function init(){applyLang();applyView();renderProjects();renderFilters();renderCases();renderSkills();renderStack();renderNow();githubStats();$$('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;applyLang();applyView()});$$('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;applyView()});const theme=localStorage.getItem('resume-theme')||'dark';document.documentElement.dataset.theme=theme;$('#themeToggle').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('resume-theme',n)};$('#cvMenuButton').onclick=()=>{$('#cvMenu').hidden=!$('#cvMenu').hidden};$('#shareButton').onclick=async()=>{const data={title:'Kostiantyn Bryl — Resume',url:location.href};try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(location.href);toast('Link copied')}}catch{}};$('#cmdTrigger').onclick=openPalette;$('#cmdInput').oninput=e=>{if(e.target.value.trim().toLowerCase()==='matrix'){matrixEgg();e.target.value='';renderCmd('')}else renderCmd(e.target.value)};document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPalette()}if(e.key==='Escape'&&$('#commandPalette').open)$('#commandPalette').close()});let clicks=0,timer;$('.norvexa-mark').addEventListener('click',e=>{e.preventDefault();clicks++;clearTimeout(timer);timer=setTimeout(()=>clicks=0,1200);if(clicks>=5){clicks=0;terminalEgg()}});$('#footerEgg').onclick=()=>toast('Built after midnight. Probably.');const obs=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});$$('.reveal,.section-head,.about-copy,.principle').forEach(x=>{x.classList.add('reveal');obs.observe(x)});$('#lastUpdated').textContent='Last updated — Aug 2026'}document.addEventListener('DOMContentLoaded',init);
