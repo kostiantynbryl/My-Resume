@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kostiantynbryl.github.io/My-Resume/sitemap.xml
