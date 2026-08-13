@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Kostiantyn Bryl
+N:Bryl;Kostiantyn;;;
+EMAIL;TYPE=INTERNET:kostiantynbryl@gmail.com
+URL:https://kostiantynbryl.github.io/My-Resume/
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/kostiantyn-bryl97/
+X-SOCIALPROFILE;TYPE=github:https://github.com/kostiantynbryl
+TITLE:Product & Operations Leader / Software Builder
+END:VCARD
