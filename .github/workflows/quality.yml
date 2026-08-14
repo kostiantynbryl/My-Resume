@@ -17,49 +17,66 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
       - name: Required files
         run: |
           test -f index.html
           test -f multipage.css
           test -f multipage-v5.css
+          test -f pro-v11.css
           test -f multipage.js
           test -f multipage-core.js
           test -f final-v1.js
           test -f a11y-v1.js
           test -f easter-v1.js
+          test -f pre-v11.js
+          test -f pro-v11-data.js
+          test -f pro-v11.js
           test -f portfolio-data.js
+          test -f data/github.json
           test -f work/index.html
           test -f experience/index.html
           test -f case-studies/index.html
           test -f about/index.html
           test -f now/index.html
           test -f contact/index.html
+          test -f ecosystem/index.html
+          test -f system/index.html
           test -f 404.html
           test -f robots.txt
           test -f sitemap.xml
           test -f README.md
           test -f cv/generate.py
+          test -f cv/generate_roles.py
+          test -f scripts/site_snapshot.py
 
-      - name: JavaScript syntax
+      - name: JavaScript and Python syntax
         run: |
           node --check multipage.js
           node --check multipage-core.js
           node --check final-v1.js
           node --check a11y-v1.js
           node --check easter-v1.js
+          node --check pre-v11.js
+          node --check pro-v11-data.js
+          node --check pro-v11.js
           node --check portfolio-data.js
+          python -m py_compile cv/generate.py cv/generate_roles.py scripts/site_snapshot.py
 
-      - name: Generate recruiter PDFs
+      - name: Generate all recruiter PDFs
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-core
           python -m pip install --quiet reportlab
           python cv/generate.py
-          test -f assets/cv/Kostiantyn_Bryl_CV_EN.pdf
-          test -f assets/cv/Kostiantyn_Bryl_CV_PL.pdf
-          test -f assets/cv/Kostiantyn_Bryl_CV_RU.pdf
-          test -f assets/cv/Kostiantyn_Bryl_CV_UA.pdf
+          python cv/generate_roles.py
+          for lang in EN PL RU UA; do test -f "assets/cv/Kostiantyn_Bryl_CV_${lang}.pdf"; done
+          for role in RECRUITER ENGINEERING PRODUCT; do
+            for lang in EN PL RU UA; do test -f "assets/cv/Kostiantyn_Bryl_CV_${role}_${lang}.pdf"; done
+          done
 
       - name: Internal reference checks
         run: |
@@ -101,13 +118,7 @@ jobs:
           console.log('SCORES',Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])));
           for(const cat of ['accessibility','performance']){
             console.log(`--- ${cat.toUpperCase()} ---`);
-            for(const ref of r.categories[cat].auditRefs){
-              const a=r.audits[ref.id];
-              if(a && a.scoreDisplayMode!=='notApplicable' && a.score!==1){
-                console.log(`${ref.id}: score=${a.score} | ${a.title} | ${a.displayValue||''}`);
-                if(a.details?.items?.length) for(const item of a.details.items.slice(0,8)) console.log('  ',JSON.stringify(item).slice(0,700));
-              }
-            }
+            for(const ref of r.categories[cat].auditRefs){const a=r.audits[ref.id];if(a&&a.scoreDisplayMode!=='notApplicable'&&a.score!==1)console.log(`${ref.id}: score=${a.score} | ${a.title} | ${a.displayValue||''}`)}
           }
           NODE
 
