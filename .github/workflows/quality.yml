@@ -16,55 +16,108 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - name: Required multipage files
+          node-version: 24
+
+      - name: Required files
         run: |
           test -f index.html
           test -f multipage.css
           test -f multipage-v5.css
-          test -f portfolio-data.js
           test -f multipage.js
+          test -f multipage-core.js
+          test -f final-v1.js
+          test -f a11y-v1.js
+          test -f portfolio-data.js
           test -f work/index.html
           test -f experience/index.html
           test -f case-studies/index.html
           test -f about/index.html
           test -f now/index.html
           test -f contact/index.html
-          test -f recruiter/index.html
-          test -f engineering/index.html
-          test -f product/index.html
-          test -f work/clearup/index.html
-          test -f work/cutflow-batch/index.html
-          test -f work/luma-bay/index.html
-          test -f work/telemanage/index.html
-          test -f work/bryltab/index.html
           test -f 404.html
           test -f robots.txt
           test -f sitemap.xml
-          test -f assets/norvexa.svg
-          test -f assets/project-clearup.svg
-          test -f assets/project-lumabay.svg
-          test -f assets/project-telemanage.svg
-          test -f assets/project-bryltab.svg
+          test -f README.md
+          test -f cv/generate.py
+
       - name: JavaScript syntax
         run: |
-          node --check portfolio-data.js
           node --check multipage.js
+          node --check multipage-core.js
+          node --check final-v1.js
+          node --check a11y-v1.js
+          node --check portfolio-data.js
+
+      - name: Generate recruiter PDFs
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core
+          python -m pip install --quiet reportlab
+          python cv/generate.py
+          test -f assets/cv/Kostiantyn_Bryl_CV_EN.pdf
+          test -f assets/cv/Kostiantyn_Bryl_CV_PL.pdf
+          test -f assets/cv/Kostiantyn_Bryl_CV_RU.pdf
+          test -f assets/cv/Kostiantyn_Bryl_CV_UA.pdf
+
       - name: Internal reference checks
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
-          root=Path('.').resolve()
+          root=Path('.')
+          pages=list(root.glob('*.html'))+list(root.glob('*/*.html'))+list(root.glob('work/*/*.html'))
           missing=[]
-          for page in Path('.').rglob('*.html'):
+          for page in pages:
               text=page.read_text(encoding='utf-8')
               for ref in re.findall(r'(?:src|href)="([^"#?]+)',text):
-                  if ref.startswith(('http://','https://','mailto:','data:','javascript:')): continue
+                  if ref.startswith(('http://','https://','mailto:','data:')): continue
                   target=(page.parent/ref).resolve()
                   if ref.endswith('/'):
                       target=target/'index.html'
                   if not target.exists(): missing.append(f'{page}: {ref}')
           if missing: raise SystemExit('Missing local references:\n'+'\n'.join(missing))
-          print('All multipage references OK')
+          print('Internal references OK')
           PY
+
+      - name: Lighthouse CI
+        id: lighthouse
+        continue-on-error: true
+        run: |
+          npm install --global @lhci/cli@0.15.x
+          lhci autorun --config=lighthouserc.cjs
+
+      - name: Lighthouse diagnostics
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const dir='.lighthouseci-reports';
+          if(!fs.existsSync(dir)){console.log('No Lighthouse report directory');process.exit(0)}
+          const file=fs.readdirSync(dir).find(f=>f.endsWith('.report.json'))||fs.readdirSync(dir).find(f=>f.endsWith('.json'));
+          if(!file){console.log('No Lighthouse JSON report');process.exit(0)}
+          const r=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+          console.log('SCORES',Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])));
+          for(const cat of ['accessibility','performance']){
+            console.log(`--- ${cat.toUpperCase()} ---`);
+            for(const ref of r.categories[cat].auditRefs){
+              const a=r.audits[ref.id];
+              if(a && a.scoreDisplayMode!=='notApplicable' && a.score!==1){
+                console.log(`${ref.id}: score=${a.score} | ${a.title} | ${a.displayValue||''}`);
+                if(a.details?.items?.length) for(const item of a.details.items.slice(0,8)) console.log('  ',JSON.stringify(item).slice(0,700));
+              }
+            }
+          }
+          NODE
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci-reports
+          if-no-files-found: warn
+          include-hidden-files: true
+
+      - name: Enforce Lighthouse threshold
+        if: steps.lighthouse.outcome == 'failure'
+        run: exit 1
