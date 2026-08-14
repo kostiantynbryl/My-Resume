@@ -43,10 +43,15 @@ jobs:
           test -f polish-v121.js
           test -f polish-v121-lexicon.js
           test -f polish-v121-pages.js
+          test -f polish-v121-final.js
+          test -f zh-v13-data.js
+          test -f zh-v13-ui.js
+          test -f personal-v13.js
           test -f analytics-v12.js
           test -f portfolio-data.js
           test -f site.config.json
           test -f data/github.json
+          test -f assets/kb.svg
           test -f work/index.html
           test -f experience/index.html
           test -f case-studies/index.html
@@ -63,9 +68,12 @@ jobs:
           test -f brand/linkedin-profile.md
           test -f cv/generate.py
           test -f cv/generate_roles.py
+          test -f cv/generate_zh.py
           test -f scripts/site_snapshot.py
+          test -f scripts/personal_meta.py
           test -f scripts/mobile_smoke.mjs
           test -f scripts/localization_smoke.mjs
+          test -f scripts/chinese_personal_smoke.mjs
 
       - name: JavaScript, Python and config syntax
         run: |
@@ -83,11 +91,16 @@ jobs:
           node --check polish-v121.js
           node --check polish-v121-lexicon.js
           node --check polish-v121-pages.js
+          node --check polish-v121-final.js
+          node --check zh-v13-data.js
+          node --check zh-v13-ui.js
+          node --check personal-v13.js
           node --check analytics-v12.js
           node --check portfolio-data.js
           node --check scripts/mobile_smoke.mjs
           node --check scripts/localization_smoke.mjs
-          python -m py_compile cv/generate.py cv/generate_roles.py scripts/site_snapshot.py
+          node --check scripts/chinese_personal_smoke.mjs
+          python -m py_compile cv/generate.py cv/generate_roles.py cv/generate_zh.py scripts/site_snapshot.py scripts/personal_meta.py
           python - <<'PY'
           import json
           json.load(open('site.config.json',encoding='utf-8'))
@@ -98,13 +111,21 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-core
-          python -m pip install --quiet reportlab
+          python -m pip install --quiet reportlab pillow
           python cv/generate.py
           python cv/generate_roles.py
-          for lang in EN PL RU UA; do test -f "assets/cv/Kostiantyn_Bryl_CV_${lang}.pdf"; done
+          python cv/generate_zh.py
+          for lang in EN PL RU UA ZH; do test -f "assets/cv/Kostiantyn_Bryl_CV_${lang}.pdf"; done
           for role in RECRUITER ENGINEERING PRODUCT; do
-            for lang in EN PL RU UA; do test -f "assets/cv/Kostiantyn_Bryl_CV_${role}_${lang}.pdf"; done
+            for lang in EN PL RU UA ZH; do test -f "assets/cv/Kostiantyn_Bryl_CV_${role}_${lang}.pdf"; done
           done
+
+      - name: Personal metadata generator smoke
+        run: |
+          python scripts/personal_meta.py
+          grep -q 'Kostiantyn Bryl — Personal Portfolio' index.html
+          grep -q 'hreflang="zh-CN"' index.html
+          grep -q 'Kostiantyn Bryl Portfolio' index.html
 
       - name: Internal reference checks
         run: |
