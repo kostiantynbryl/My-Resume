@@ -38,6 +38,7 @@ jobs:
           test -f pro-v11.js
           test -f proof-v12-data.js
           test -f proof-v12.js
+          test -f proof-v12-home.js
           test -f analytics-v12.js
           test -f portfolio-data.js
           test -f site.config.json
@@ -73,6 +74,7 @@ jobs:
           node --check pro-v11.js
           node --check proof-v12-data.js
           node --check proof-v12.js
+          node --check proof-v12-home.js
           node --check analytics-v12.js
           node --check portfolio-data.js
           node --check scripts/mobile_smoke.mjs
