@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T10:18:53.267770+00:00",
+  "generated_at": "2026-08-14T10:59:31.735061+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,11 +11,16 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-14T10:18:49Z",
-      "pushed_at": "2026-08-14T10:18:44Z",
+      "updated_at": "2026-08-14T10:19:03Z",
+      "pushed_at": "2026-08-14T10:59:13Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "48ef07f7acaa",
+        "message": "v1.2 — Proof & Conversion",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/48ef07f7acaa3e5fcddb19df28298d05676f76a0"
+      }
     },
     {
       "name": "Norvexa-Solo",
@@ -26,7 +31,12 @@
       "pushed_at": "2026-08-14T06:12:49Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "5609d42d3663",
+        "message": "release: publish Norvexa Flow 0.2.1-alpha01 [release audit-alpha01]",
+        "url": "https://github.com/kostiantynbryl/Norvexa-Solo/commit/5609d42d36636f0545652ff33f504c9e82e7bb2b"
+      }
     },
     {
       "name": "BrylTab-Bouncer-Glass",
@@ -37,7 +47,12 @@
       "pushed_at": "2026-08-12T13:18:04Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "ab4619e752f8",
+        "message": "BrylTab Bouncer Glass v0.1.3",
+        "url": "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass/commit/ab4619e752f8088bbbf0adb32baf23688abfad9f"
+      }
     },
     {
       "name": "CutFlow-Batch",
@@ -48,7 +63,12 @@
       "pushed_at": "2026-08-10T11:39:33Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "6491a55296d7",
+        "message": "docs: fix screenshot index path",
+        "url": "https://github.com/kostiantynbryl/CutFlow-Batch/commit/6491a55296d73084adb1c6fa07deac283f53b19e"
+      }
     },
     {
       "name": "ClearUp",
@@ -59,7 +79,17 @@
       "pushed_at": "2026-08-07T14:33:22Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "fc90b7022963",
+        "message": "Use apkanalyzer for 0.1.1 APK verification",
+        "url": "https://github.com/kostiantynbryl/ClearUp/commit/fc90b7022963f8a98c2bcd9be7a37691d1f5fa9e"
+      },
+      "latest_release": {
+        "tag_name": "v0.1.1",
+        "published_at": "2026-08-07T14:33:22Z",
+        "html_url": "https://github.com/kostiantynbryl/ClearUp/releases/tag/v0.1.1"
+      }
     },
     {
       "name": "Norvexa-OneStep",
@@ -70,7 +100,12 @@
       "pushed_at": "2026-08-07T14:05:53Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "0704b9e4b8aa",
+        "message": "ux: connect progress cards to goal details",
+        "url": "https://github.com/kostiantynbryl/Norvexa-OneStep/commit/0704b9e4b8aa16ff8461dfe27b36ba97f480df1e"
+      }
     },
     {
       "name": "LumaBay",
@@ -81,7 +116,12 @@
       "pushed_at": "2026-08-03T21:57:21Z",
       "description": " Luma Bay: Match & Restore Norvexa Games",
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "d6c38fcfe61f",
+        "message": "ci: enable one-shot validation for 0.1.2 PR",
+        "url": "https://github.com/kostiantynbryl/LumaBay/commit/d6c38fcfe61f79c515d1d3437445be496490f949"
+      }
     },
     {
       "name": "Norvexa-Reader",
@@ -92,7 +132,12 @@
       "pushed_at": "2026-08-02T09:59:11Z",
       "description": null,
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "8342a84d41be",
+        "message": "chore: initialize Norvexa Reader repository",
+        "url": "https://github.com/kostiantynbryl/Norvexa-Reader/commit/8342a84d41be799dc8bed98d1c84cf562abcb602"
+      }
     },
     {
       "name": "site",
@@ -103,7 +148,12 @@
       "pushed_at": "2026-08-13T17:25:26Z",
       "description": "test site",
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "027e79de6d0b",
+        "message": "Cache TapSpeed product page assets",
+        "url": "https://github.com/kostiantynbryl/site/commit/027e79de6d0b95d0dc2d9ac7021a3e11f4036c6b"
+      }
     },
     {
       "name": "kostiantynbryl.githab.io",
@@ -114,7 +164,12 @@
       "pushed_at": "2026-04-27T13:21:52Z",
       "description": "test site",
       "homepage": null,
-      "archived": false
+      "archived": false,
+      "latest_commit": {
+        "sha": "e2c65be0d770",
+        "message": "Initial commit",
+        "url": "https://github.com/kostiantynbryl/kostiantynbryl.githab.io/commit/e2c65be0d77013940207278acc77c8f8270ee526"
+      }
     }
   ]
 }

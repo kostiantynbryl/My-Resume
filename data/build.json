@@ -1,5 +1,6 @@
 {
-  "version": "1.1",
-  "commit": "535292ddfeeeec0ac68618fb34d208b68813b2f0",
-  "generated_at": "2026-08-14T10:18:53.268138+00:00"
+  "version": "1.2",
+  "commit": "48ef07f7acaa3e5fcddb19df28298d05676f76a0",
+  "generated_at": "2026-08-14T10:59:31.735474+00:00",
+  "base": "https://kostiantynbryl.github.io/My-Resume/"
 }
