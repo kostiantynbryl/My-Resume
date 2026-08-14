@@ -17,42 +17,54 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Required files
+      - name: Required multipage files
         run: |
           test -f index.html
           test -f multipage.css
+          test -f multipage-v5.css
+          test -f portfolio-data.js
           test -f multipage.js
-          test -f multipage-v4.js
           test -f work/index.html
           test -f experience/index.html
           test -f case-studies/index.html
           test -f about/index.html
+          test -f now/index.html
           test -f contact/index.html
+          test -f recruiter/index.html
+          test -f engineering/index.html
+          test -f product/index.html
+          test -f work/clearup/index.html
+          test -f work/cutflow-batch/index.html
+          test -f work/luma-bay/index.html
+          test -f work/telemanage/index.html
+          test -f work/bryltab/index.html
           test -f 404.html
           test -f robots.txt
           test -f sitemap.xml
           test -f assets/norvexa.svg
+          test -f assets/project-clearup.svg
+          test -f assets/project-lumabay.svg
+          test -f assets/project-telemanage.svg
+          test -f assets/project-bryltab.svg
       - name: JavaScript syntax
         run: |
+          node --check portfolio-data.js
           node --check multipage.js
-          node --check multipage-v4.js
       - name: Internal reference checks
         run: |
           python - <<'PY'
           from pathlib import Path
-          from urllib.parse import urlsplit
           import re
-          root=Path('.')
-          pages=[root/'index.html',root/'work/index.html',root/'experience/index.html',root/'case-studies/index.html',root/'about/index.html',root/'contact/index.html']
+          root=Path('.').resolve()
           missing=[]
-          for page in pages:
+          for page in Path('.').rglob('*.html'):
               text=page.read_text(encoding='utf-8')
               for ref in re.findall(r'(?:src|href)="([^"#?]+)',text):
-                  if ref.startswith(('http://','https://','mailto:','data:')): continue
+                  if ref.startswith(('http://','https://','mailto:','data:','javascript:')): continue
                   target=(page.parent/ref).resolve()
                   if ref.endswith('/'):
                       target=target/'index.html'
                   if not target.exists(): missing.append(f'{page}: {ref}')
           if missing: raise SystemExit('Missing local references:\n'+'\n'.join(missing))
-          print('Multipage references OK')
+          print('All multipage references OK')
           PY
