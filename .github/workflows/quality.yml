@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Required files
         run: |
@@ -78,6 +78,20 @@ jobs:
           PY
 
       - name: Lighthouse CI
+        id: lighthouse
+        continue-on-error: true
         run: |
           npm install --global @lhci/cli@0.15.x
           lhci autorun --config=lighthouserc.cjs
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci-reports
+          if-no-files-found: error
+
+      - name: Enforce Lighthouse threshold
+        if: steps.lighthouse.outcome == 'failure'
+        run: exit 1
