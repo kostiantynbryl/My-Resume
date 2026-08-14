@@ -1,11 +1,13 @@
 (()=>{
   const base=new URL('.',document.currentScript.src);
-  const rev='1.2.2';
+  const rev='1.3.0';
 
-  // Apply the saved language as early as possible so the browser sees the correct page language.
+  // Apply the saved language as early as possible so browsers and assistive tech see the correct locale.
   try{
+    const ext=localStorage.getItem('resume-lang-ext');
     const saved=localStorage.getItem('resume-lang');
-    if(['en','pl','ru','uk'].includes(saved))document.documentElement.lang=saved;
+    if(ext==='zh')document.documentElement.lang='zh-CN';
+    else if(['en','pl','ru','uk'].includes(saved))document.documentElement.lang=saved;
   }catch{}
 
   // Internal proof/build widgets are not part of the public resume.
@@ -32,7 +34,7 @@
     document.head.appendChild(s);
   };
   const home=document.body?.dataset.page==='home';
-  const finish=()=>load('polish-v121.js',()=>load('polish-v121-lexicon.js',()=>load('polish-v121-pages.js',()=>load('polish-v121-final.js',()=>{stripInternal();if(!home)load('analytics-v12.js')}))));
-  const core=()=>load('pre-v11.js',()=>load('multipage-core.js',()=>load('final-v1.js',()=>load('a11y-v1.js',()=>load('easter-v1.js',()=>load('pro-v11.js',()=>home?load('proof-v12-home.js',finish):load('proof-v12.js',finish)))))));
+  const finish=()=>load('polish-v121.js',()=>load('polish-v121-lexicon.js',()=>load('polish-v121-pages.js',()=>load('polish-v121-final.js',()=>load('zh-v13-ui.js',()=>load('personal-v13.js',()=>{stripInternal();if(!home)load('analytics-v12.js')}))))));
+  const core=()=>load('zh-v13-data.js',()=>load('pre-v11.js',()=>load('multipage-core.js',()=>load('final-v1.js',()=>load('a11y-v1.js',()=>load('easter-v1.js',()=>load('pro-v11.js',()=>home?load('proof-v12-home.js',finish):load('proof-v12.js',finish))))))));
   if(home)load('pro-v11-data.js',core);else load('proof-v12-data.js',()=>load('pro-v11-data.js',core));
 })();
