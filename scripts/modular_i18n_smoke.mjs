@@ -42,11 +42,11 @@ const recruiterCv=await page.locator('a[download]').first().getAttribute('href')
 if(!recruiterCv?.includes('RECRUITER_ZH.pdf'))throw new Error(`Recruiter Chinese CV mismatch: ${recruiterCv}`);
 await open('/engineering/','engineering',['具有系统思维的软件构建者。','工程 · Android · 自动化']);
 await open('/product/','product',['由运营经验支撑的产品判断。','产品 · 运营']);
-await open('/work/clearup/','clearup',['以隐私为先的 Android 存储工具','证据','问题','项目概览']);
-await open('/work/cutflow-batch/','cutflow',['Windows 批量视频裁剪工具','项目概览']);
-await open('/work/luma-bay/','luma',['以成长、氛围和短时移动体验为核心','项目概览']);
-await open('/work/telemanage/','telemanage',['内容运营平台','项目概览']);
-await open('/work/bryltab/','bryltab',['SystemUI','项目概览']);
+await open('/work/clearup/','clearup',['以隐私为先的 Android 存储工具','证据','问题','项目概览','高权限执行路径']);
+await open('/work/cutflow-batch/','cutflow',['Windows 批量视频裁剪工具','深入了解']);
+await open('/work/luma-bay/','luma',['以成长、氛围和短时移动体验为核心']);
+await open('/work/telemanage/','telemanage',['内容运营平台']);
+await open('/work/bryltab/','bryltab',['SystemUI','设备','架构']);
 
 await browser.close();
 console.log('Modular Header/Main/Footer + five-language Chinese QA passed.');
