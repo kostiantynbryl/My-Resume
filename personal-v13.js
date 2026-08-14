@@ -18,6 +18,7 @@ function patchBrand(){const c=C[lang()]||C.en;
  document.querySelectorAll('.v11-ecosystem').forEach(a=>{const span=a.querySelector('span');if(span)a.innerHTML=c.ecosystem+'<span>↗</span>';else text(a,c.ecosystem)});
  const metric=[...document.querySelectorAll('.mp-metric span')][2];if(metric)text(metric,c.metric);
  if(PAGE==='ecosystem'){const hero=document.querySelector('#ecosystemRoot .mp-page-hero');if(hero){text(hero.querySelector('.mp-eyebrow'),lang()==='zh'?'项目 / 生态':lang()==='ru'?'ПРОЕКТЫ / ЭКОСИСТЕМА':lang()==='uk'?'ПРОЄКТИ / ЕКОСИСТЕМА':lang()==='pl'?'PROJEKTY / EKOSYSTEM':'PROJECTS / ECOSYSTEM');text(hero.querySelector('h1'),c.ecosystem)}}
+ if(PAGE==='experience'){document.querySelectorAll('.mp-timeline-row').forEach(row=>{if(row.querySelector('h3')?.textContent.trim()==='DataGroup')text(row.querySelector('time'),'2016—2018')})}
  document.title=document.title.replace(/NORVEXA\s*[×—-]?\s*/gi,'').replace(/\s+\|\s+NORVEXA/gi,'');
  const toast=document.getElementById('mpToast');if(toast&&/NORVEXA SYSTEM/i.test(toast.textContent))toast.textContent=toast.textContent.replace(/NORVEXA SYSTEM/i,c.system);
  const terminal=document.querySelector('.v11-terminal-head span:first-child');if(terminal&&/^NORVEXA/i.test(terminal.textContent))terminal.textContent=terminal.textContent.replace(/^NORVEXA/,'KB');
