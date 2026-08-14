@@ -91,6 +91,7 @@ jobs:
           name: lighthouse-report
           path: .lighthouseci-reports
           if-no-files-found: error
+          include-hidden-files: true
 
       - name: Enforce Lighthouse threshold
         if: steps.lighthouse.outcome == 'failure'
