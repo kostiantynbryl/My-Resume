@@ -27,10 +27,14 @@ jobs:
           sleep 2
       - name: Check 375 / 430 / 768 / 1024 layouts
         run: node scripts/mobile_smoke.mjs
+      - name: Check RU / UA / PL desktop localization
+        run: node scripts/localization_smoke.mjs
       - name: Upload responsive screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: responsive-visual-qa
-          path: artifacts/visual-qa
+          path: |
+            artifacts/visual-qa
+            artifacts/localization-qa
           if-no-files-found: warn

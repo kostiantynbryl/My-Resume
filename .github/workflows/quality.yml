@@ -28,6 +28,7 @@ jobs:
           test -f multipage-v5.css
           test -f pro-v11.css
           test -f proof-v12.css
+          test -f polish-v121.css
           test -f multipage.js
           test -f multipage-core.js
           test -f final-v1.js
@@ -39,6 +40,9 @@ jobs:
           test -f proof-v12-data.js
           test -f proof-v12.js
           test -f proof-v12-home.js
+          test -f polish-v121.js
+          test -f polish-v121-lexicon.js
+          test -f polish-v121-pages.js
           test -f analytics-v12.js
           test -f portfolio-data.js
           test -f site.config.json
@@ -61,6 +65,7 @@ jobs:
           test -f cv/generate_roles.py
           test -f scripts/site_snapshot.py
           test -f scripts/mobile_smoke.mjs
+          test -f scripts/localization_smoke.mjs
 
       - name: JavaScript, Python and config syntax
         run: |
@@ -75,9 +80,13 @@ jobs:
           node --check proof-v12-data.js
           node --check proof-v12.js
           node --check proof-v12-home.js
+          node --check polish-v121.js
+          node --check polish-v121-lexicon.js
+          node --check polish-v121-pages.js
           node --check analytics-v12.js
           node --check portfolio-data.js
           node --check scripts/mobile_smoke.mjs
+          node --check scripts/localization_smoke.mjs
           python -m py_compile cv/generate.py cv/generate_roles.py scripts/site_snapshot.py
           python - <<'PY'
           import json
