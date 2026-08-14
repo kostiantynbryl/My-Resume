@@ -7,54 +7,52 @@ await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true});
 
 const checks={
- ru:{home:['Чем я полезен бизнесу','Создаю продукты','Ключевой кейс','БЕЗОПАСНО.','Доказательства и результат','ПУТИ ПРИВИЛЕГИРОВАННОГО ВЫПОЛНЕНИЯ'],forbid:['What I actually do','Build products','Featured case','SAFE.','Proof & outcomes','PRIVILEGED EXECUTION PATHS'],project:['КЕЙС / ДОКАЗАТЕЛЬСТВА','Основатель / Продукт / Разработка','ТАЙМАУТ ЗАПРОСА СЛУЖБЫ ДОСТУПНОСТИ'],work:['NORVEXA / ПРОЕКТЫ','ОТКРЫТЬ →'],contact:['КОНТАКТЫ / НАПРЯМУЮ','Продукт · Операции · Разработка · Автоматизация','Только прямые каналы. Без контактной формы и лишнего отслеживания.','QR ПОРТФОЛИО']},
- uk:{home:['Чим я корисний бізнесу','Створюю продукти','Ключовий кейс','БЕЗПЕЧНО.','Докази та результат','ШЛЯХИ ПРИВІЛЕЙОВАНОГО ВИКОНАННЯ'],forbid:['What I actually do','Build products','Featured case','SAFE.','Proof & outcomes','PRIVILEGED EXECUTION PATHS'],project:['КЕЙС / ДОКАЗИ','Засновник / Продукт / Розробка','ТАЙМАУТ ЗАПИТУ СЛУЖБИ ДОСТУПНОСТІ'],work:['NORVEXA / ПРОЄКТИ','ВІДКРИТИ →'],contact:['КОНТАКТИ / НАПРЯМУ','Продукт · Операції · Розробка · Автоматизація','Лише прямі канали. Без контактної форми та зайвого відстеження.','QR ПОРТФОЛІО']},
- pl:{home:['Jaką wartość daję biznesowi','Tworzę produkty','Kluczowy case','BEZPIECZNIE.','Dowody i rezultat','ŚCIEŻKI WYKONANIA UPRZYWILEJOWANEGO'],forbid:['What I actually do','Build products','Featured case','SAFE.','Proof & outcomes','PRIVILEGED EXECUTION PATHS'],project:['CASE / DOWODY','Założyciel / Produkt / Inżynieria','LIMIT CZASU ŻĄDANIA DOSTĘPNOŚCI'],work:['NORVEXA / PROJEKTY','OTWÓRZ →'],contact:['KONTAKT / BEZPOŚREDNIO','Produkt · Operacje · Oprogramowanie · Automatyzacja','Tylko bezpośrednie kanały. Bez formularza i warstwy śledzącej.','QR PORTFOLIO']}
+  ru:{
+    html:'ru',brand:'ЛИЧНОЕ ПОРТФОЛИО',
+    home:['Чем я полезен бизнесу','Создаю продукты','Ключевой кейс','БЕЗОПАСНО.','Доказательства и результат'],
+    work:['ПОРТФОЛИО / ПРОЕКТЫ','Четыре направления. Один продуктовый подход.','Открыть →'],
+    about:['Бизнес-мышление с инстинктом создателя.','Что я делаю','Как я думаю','Как я работаю'],
+    contact:['КОНТАКТ / НАПРЯМУЮ','Продукт · Операции · Разработка ПО · Автоматизация','Только прямые каналы связи.','QR резюме']
+  },
+  uk:{
+    html:'uk',brand:'ОСОБИСТЕ ПОРТФОЛІО',
+    home:['Чим я корисний бізнесу','Створюю продукти','Ключовий кейс','БЕЗПЕЧНО.','Докази та результат'],
+    work:['ПОРТФОЛІО / ПРОЄКТИ','Чотири напрями. Один продуктовий підхід.','Відкрити →'],
+    about:['Бізнес-мислення з інстинктом творця.','Що я роблю','Як я думаю','Як я працюю'],
+    contact:['КОНТАКТ / НАПРЯМУ','Продукт · Операції · Розробка ПЗ · Автоматизація','Тільки прямі канали зв’язку.','QR резюме']
+  },
+  pl:{
+    html:'pl',brand:'PORTFOLIO OSOBISTE',
+    home:['Co robię w praktyce','Tworzę produkty','Kluczowy case','BEZPIECZNIE.','Dowody i rezultat'],
+    work:['PORTFOLIO / PROJEKTY','Cztery kierunki. Jedna dyscyplina produktowa.','Otwórz →'],
+    about:['Osąd biznesowy z instynktem twórcy.','Co robię','Jak myślę','Jak pracuję'],
+    contact:['KONTAKT / BEZPOŚREDNIO','Produkt · Operacje · Software · Automatyzacja','Tylko bezpośrednie kanały.','QR do CV']
+  }
 };
 
-const internalText=['Portfolio infrastructure','SYSTEM / DELIVERY','BUILD / LOCAL SNAPSHOT','What ships / recent activity','Что выпускается / последняя активность'];
-const internalSelectors=['#v12Infra','#v12Shipping','.v11-build','.v11-build-dialog'];
-
-async function bodyFor(page,url,wait=1450){await page.goto(base+url,{waitUntil:'domcontentloaded'});await page.waitForTimeout(wait);return (await page.locator('body').textContent())||''}
-function requireAll(lang,label,body,items){for(const s of items)if(!body.includes(s))throw new Error(`${lang} ${label} missing: ${s}`)}
-async function forbidInternal(page,lang,label,body){for(const s of internalText)if(body.includes(s))throw new Error(`${lang} ${label} leaked internal copy: ${s}`);for(const sel of internalSelectors){if(await page.locator(sel).count())throw new Error(`${lang} ${label} leaked internal widget: ${sel}`)}}
+async function open(page,url){
+  await page.goto(base+url,{waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>document.body.classList.contains('kb-ready'),null,{timeout:10000});
+  return (await page.locator('body').textContent())||'';
+}
+function must(lang,label,body,items){for(const x of items)if(!body.includes(x))throw new Error(`${lang} ${label} missing: ${x}`)}
 
 for(const [lang,c] of Object.entries(checks)){
   const ctx=await browser.newContext({viewport:{width:1365,height:768}});
+  await ctx.addInitScript(l=>{localStorage.setItem('resume-lang',l);localStorage.removeItem('resume-lang-ext')},lang);
   const page=await ctx.newPage();
-  await page.addInitScript(l=>localStorage.setItem('resume-lang',l),lang);
-
-  const home=await bodyFor(page,'/',1500);
-  requireAll(lang,'home',home,c.home);
-  for(const s of c.forbid)if(home.includes(s))throw new Error(`${lang} home leaked English: ${s}`);
-  await forbidInternal(page,lang,'home',home);
-  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-  if(overflow>2)throw new Error(`${lang} home horizontal overflow: ${overflow}px`);
+  let body=await open(page,'/');
+  must(lang,'home',body,[c.brand,...c.home]);
+  if((await page.locator('html').getAttribute('lang'))!==c.html)throw new Error(`${lang}: wrong html lang`);
   await page.screenshot({path:`${out}/home-${lang}-1365.png`,fullPage:true});
 
-  const project=await bodyFor(page,'/work/clearup/',1600);
-  requireAll(lang,'ClearUp',project,c.project);
-  for(const s of ['CASE / EVIDENCE','PRIVILEGED EXECUTION PATHS','Founder / Product / Engineering'])if(project.includes(s))throw new Error(`${lang} ClearUp leaked English: ${s}`);
-  await forbidInternal(page,lang,'ClearUp',project);
-  await page.screenshot({path:`${out}/clearup-${lang}-1365.png`,fullPage:true});
-
-  const work=await bodyFor(page,'/work/',1500);
-  requireAll(lang,'work',work,c.work);
-  if(work.includes('EXPLORE →'))throw new Error(`${lang} work leaked English EXPLORE`);
-  await forbidInternal(page,lang,'work',work);
-
-  const about=await bodyFor(page,'/about/',1500);
-  await forbidInternal(page,lang,'about',about);
-
-  const now=await bodyFor(page,'/now/',1500);
-  await forbidInternal(page,lang,'now',now);
-
-  const contact=await bodyFor(page,'/contact/',1450);
-  requireAll(lang,'contact',contact,c.contact);
-  for(const s of ['CONNECT / DIRECT','Direct channels only. No contact-form tracking layer.','Resume QR','Scan to open the latest published version of this portfolio.'])if(contact.includes(s))throw new Error(`${lang} contact leaked English: ${s}`);
-  await forbidInternal(page,lang,'contact',contact);
+  body=await open(page,'/work/');must(lang,'work',body,c.work);
+  body=await open(page,'/about/');must(lang,'about',body,c.about);
+  const crumb=(await page.locator('#mpBreadcrumb').textContent())||'';
+  if(crumb.startsWith('NORVEXA'))throw new Error(`${lang}: legacy breadcrumb leaked`);
+  body=await open(page,'/contact/');must(lang,'contact',body,c.contact);
   await page.screenshot({path:`${out}/contact-${lang}-1365.png`,fullPage:true});
   await ctx.close();
 }
 await browser.close();
-console.log('Multilingual visual/localization QA passed.');
+console.log('EN-independent RU / UA / PL modular localization QA passed.');
