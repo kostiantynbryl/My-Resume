@@ -1,0 +1,41 @@
+name: Refresh portfolio snapshot
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.html'
+      - 'data/**'
+      - 'assets/og/**'
+      - 'assets/gallery/**'
+      - 'assets/profile.webp'
+      - 'assets/cv/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate build-time snapshot and media
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m pip install --quiet pillow
+          python scripts/site_snapshot.py
+      - name: Commit generated snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/github.json data/build.json assets/profile.webp assets/gallery assets/og '*.html' */index.html work/*/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'build: refresh portfolio snapshot and social cards [skip ci]'
+          git push
