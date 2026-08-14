@@ -20,13 +20,13 @@ for(const vp of viewports){
   for(const c of cases){
     const page=await ctx.newPage();
     await page.goto(new URL(c.path,base).href,{waitUntil:'domcontentloaded',timeout:15000});
-    await page.waitForSelector('#main',{state:'attached',timeout:5000});
+    await page.waitForSelector('main',{state:'attached',timeout:5000});
     await page.waitForTimeout(900);
     const check=await page.evaluate(()=>({
       width:document.documentElement.scrollWidth,
       inner:window.innerWidth,
       header:!!document.querySelector('#mpHeader'),
-      main:!!document.querySelector('#main'),
+      main:!!document.querySelector('main'),
       headerHeight:document.querySelector('#mpHeader')?.getBoundingClientRect().height||0
     }));
     if(check.width>check.inner+1||!check.header||!check.main||check.headerHeight<40){
