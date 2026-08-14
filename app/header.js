@@ -5,25 +5,31 @@
   ];
   const active=id=>A.page===id||(A.page==='project'&&id==='work')||(A.page==='audience'&&id==='home');
   const langs=()=>I.supported.map(x=>`<button type="button" data-kb-lang="${x}" class="${x===I.lang?'active':''}" aria-pressed="${x===I.lang}">${I.labels[x]}</button>`).join('');
+  const aria=()=>({
+    en:['Primary navigation','Language'],pl:['Główna nawigacja','Język'],ru:['Основная навигация','Язык'],uk:['Основна навігація','Мова'],zh:['主导航','语言']
+  }[I.lang]||['Primary navigation','Language']);
   function render(){
-    const h=document.getElementById('mpHeader');if(!h)return;h.className='mp-header';
+    const h=document.getElementById('mpHeader');if(!h)return;
+    document.body.classList.remove('menu-open');
+    h.className='mp-header';
+    const [navLabel,langLabel]=aria();
     h.innerHTML=`<div class="shell mp-header-row">
       <a class="mp-brand" id="mpBrand" href="${A.path('')}">
         <img src="${A.path('assets/kb.svg')}" alt="" width="38" height="38">
         <span><b>KOSTIANTYN BRYL</b><small>${I.t('brand')}</small></span>
       </a>
-      <nav class="mp-nav" aria-label="Primary navigation">${nav().map(([id,p,label])=>`<a href="${A.path(p)}" class="${active(id)?'active':''}">${label}</a>`).join('')}</nav>
+      <nav class="mp-nav" aria-label="${navLabel}">${nav().map(([id,p,label])=>`<a href="${A.path(p)}" class="${active(id)?'active':''}">${label}</a>`).join('')}</nav>
       <div class="mp-actions">
         <button class="mp-cmd" id="mpCmd" type="button" aria-label="${I.t('command')}">⌘K</button>
-        <div class="mp-lang" aria-label="Language">${langs()}</div>
+        <div class="mp-lang" aria-label="${langLabel}">${langs()}</div>
         <button class="mp-icon" id="mpTheme" type="button" aria-label="${I.t('theme')}">◐</button>
         <button class="mp-menu-btn" id="mpMenuBtn" type="button" aria-label="${I.t('menu')}" aria-expanded="false">☰</button>
       </div>
     </div>
     <div class="mp-mobile-menu" id="mpMobileMenu" hidden>
       <div class="mp-mobile-top"><strong>KOSTIANTYN BRYL</strong><button id="mpMenuClose" type="button" aria-label="${I.t('close')}">×</button></div>
-      <nav aria-label="Mobile navigation">${nav().map(([id,p,label])=>`<a href="${A.path(p)}" class="${active(id)?'active':''}">${label}<span>↗</span></a>`).join('')}</nav>
-      <div class="kb-mobile-langs">${langs()}</div>
+      <nav aria-label="${navLabel}">${nav().map(([id,p,label])=>`<a href="${A.path(p)}" class="${active(id)?'active':''}">${label}<span>↗</span></a>`).join('')}</nav>
+      <div class="kb-mobile-langs" aria-label="${langLabel}">${langs()}</div>
       <div class="mp-mobile-meta"><a href="https://github.com/kostiantynbryl" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/kostiantyn-bryl97/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://t.me/kostiantynbryl" target="_blank" rel="noreferrer">Telegram ↗</a></div>
     </div>`;
     h.querySelectorAll('[data-kb-lang]').forEach(b=>b.onclick=()=>I.set(b.dataset.kbLang));
