@@ -1,0 +1,44 @@
+name: Portfolio quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Required files
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f app.js
+          test -f 404.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f assets/norvexa.svg
+      - name: Internal reference checks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          text=(root/'index.html').read_text(encoding='utf-8')
+          refs=re.findall(r'(?:src|href)="([^"#?]+)', text)
+          missing=[]
+          for ref in refs:
+              if ref.startswith(('http://','https://','mailto:','data:')):
+                  continue
+              p=root/ref
+              if not p.exists():
+                  missing.append(ref)
+          if missing:
+              raise SystemExit('Missing local references: '+', '.join(sorted(set(missing))))
+          print('Internal references OK')
+          PY
