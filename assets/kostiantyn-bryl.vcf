@@ -6,5 +6,7 @@ EMAIL;TYPE=INTERNET:kostiantynbryl@gmail.com
 URL:https://kostiantynbryl.github.io/My-Resume/
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/kostiantyn-bryl97/
 X-SOCIALPROFILE;TYPE=github:https://github.com/kostiantynbryl
+X-SOCIALPROFILE;TYPE=telegram:https://t.me/kostiantynbryl
+IMPP;X-SERVICE-TYPE=Telegram:https://t.me/kostiantynbryl
 TITLE:Product & Operations Leader / Software Builder
 END:VCARD

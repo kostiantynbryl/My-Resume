@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'cv/generate.py'
+      - 'cv/generate_roles.py'
       - '.github/workflows/cv-pdf.yml'
   workflow_dispatch:
 
@@ -23,11 +24,19 @@ jobs:
           sudo apt-get install -y -qq fonts-noto-core
           python -m pip install --quiet reportlab
           python cv/generate.py
+          python cv/generate_roles.py
+      - name: Validate role variants
+        run: |
+          for role in RECRUITER ENGINEERING PRODUCT; do
+            for lang in EN PL RU UA; do
+              test -f "assets/cv/Kostiantyn_Bryl_CV_${role}_${lang}.pdf"
+            done
+          done
       - name: Commit generated PDFs
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/cv/*.pdf
           git diff --cached --quiet && exit 0
-          git commit -m 'build: refresh multilingual CV PDFs [skip ci]'
+          git commit -m 'build: refresh multilingual and role-specific CV PDFs [skip ci]'
           git push
