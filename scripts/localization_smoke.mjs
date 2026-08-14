@@ -12,7 +12,7 @@ const checks={
  pl:{home:['Jaką wartość daję biznesowi','Tworzę produkty','Kluczowy case','BEZPIECZNIE.','Dowody i rezultat','ŚCIEŻKI WYKONANIA UPRZYWILEJOWANEGO'],forbid:['What I actually do','Build products','Featured case','SAFE.','Proof & outcomes','PRIVILEGED EXECUTION PATHS'],project:['CASE / DOWODY','Założyciel / Produkt / Inżynieria','LIMIT CZASU ŻĄDANIA DOSTĘPNOŚCI'],work:['NORVEXA / PROJEKTY','OTWÓRZ →'],contact:['KONTAKT / BEZPOŚREDNIO','Produkt · Operacje · Oprogramowanie · Automatyzacja','Tylko bezpośrednie kanały. Bez formularza i warstwy śledzącej.','QR PORTFOLIO']}
 };
 
-async function bodyFor(page,url,wait=1450){await page.goto(base+url,{waitUntil:'domcontentloaded'});await page.waitForTimeout(wait);return page.locator('body').innerText()}
+async function bodyFor(page,url,wait=1450){await page.goto(base+url,{waitUntil:'domcontentloaded'});await page.waitForTimeout(wait);return (await page.locator('body').textContent())||''}
 function requireAll(lang,label,body,items){for(const s of items)if(!body.includes(s))throw new Error(`${lang} ${label} missing: ${s}`)}
 
 for(const [lang,c] of Object.entries(checks)){
