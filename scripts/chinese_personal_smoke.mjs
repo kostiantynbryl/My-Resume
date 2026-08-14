@@ -35,7 +35,7 @@ must(body,'关于我','我做什么','我如何思考','我如何工作');
 await personal();
 
 body=await open('/contact/');
-must(body,'联系方式','产品 · 运营 · 软件 · 自动化','邮箱','作品集二维码');
+must(body,'联系方式','产品 · 运营 · 软件开发 · 自动化','邮箱','作品集二维码');
 await personal();
 await page.screenshot({path:`${out}/contact-zh-1365.png`,fullPage:true});
 
