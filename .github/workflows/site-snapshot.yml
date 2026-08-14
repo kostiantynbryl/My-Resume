@@ -25,12 +25,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate build-time snapshot and media
+      - name: Generate build-time snapshot and personal media
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python -m pip install --quiet pillow
           python scripts/site_snapshot.py
+          python scripts/personal_meta.py
       - name: Commit generated snapshot
         run: |
           git config user.name 'github-actions[bot]'
@@ -38,6 +39,6 @@ jobs:
           git add data/github.json data/build.json assets/profile.webp assets/gallery assets/og '*.html' */index.html work/*/index.html
           test -f CNAME && git add CNAME || true
           git diff --cached --quiet && exit 0
-          git commit -m 'build: refresh portfolio snapshot and social cards [skip ci]'
+          git commit -m 'build: refresh personal portfolio snapshot and social cards [skip ci]'
           git pull --rebase origin main
           git push origin HEAD:main
