@@ -27,6 +27,7 @@ jobs:
           test -f multipage-core.js
           test -f final-v1.js
           test -f a11y-v1.js
+          test -f easter-v1.js
           test -f portfolio-data.js
           test -f work/index.html
           test -f experience/index.html
@@ -46,6 +47,7 @@ jobs:
           node --check multipage-core.js
           node --check final-v1.js
           node --check a11y-v1.js
+          node --check easter-v1.js
           node --check portfolio-data.js
 
       - name: Generate recruiter PDFs
