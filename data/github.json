@@ -1,13 +1,120 @@
 {
-  "generated_at": "2026-08-14T09:58:00Z",
-  "user": {"public_repos": 9, "login": "kostiantynbryl"},
+  "generated_at": "2026-08-14T10:10:45.988295+00:00",
+  "user": {
+    "login": "kostiantynbryl",
+    "public_repos": 10,
+    "followers": 0
+  },
   "repos": [
-    {"name":"ClearUp","html_url":"https://github.com/kostiantynbryl/ClearUp","language":"Kotlin","stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"CutFlow-Batch","html_url":"https://github.com/kostiantynbryl/CutFlow-Batch","language":"Python","stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"LumaBay","html_url":"https://github.com/kostiantynbryl/LumaBay","language":null,"stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"BrylTab-Bouncer-Glass","html_url":"https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass","language":"Java","stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"Norvexa-Reader","html_url":"https://github.com/kostiantynbryl/Norvexa-Reader","language":"Kotlin","stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"Norvexa-OneStep","html_url":"https://github.com/kostiantynbryl/Norvexa-OneStep","language":"Kotlin","stargazers_count":0,"updated_at":"2026-08-14T00:00:00Z"},
-    {"name":"Norvexa-Solo","html_url":"https://github.com/kostiantynbryl/Norvexa-Solo","language":"Kotlin","stargazers_count":0,"updated_at":"2026-08-14T06:10:43Z"}
+    {
+      "name": "My-Resume",
+      "html_url": "https://github.com/kostiantynbryl/My-Resume",
+      "language": "HTML",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-14T09:04:23Z",
+      "pushed_at": "2026-08-14T10:10:34Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "Norvexa-Solo",
+      "html_url": "https://github.com/kostiantynbryl/Norvexa-Solo",
+      "language": "Kotlin",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-14T06:10:43Z",
+      "pushed_at": "2026-08-14T06:12:49Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "BrylTab-Bouncer-Glass",
+      "html_url": "https://github.com/kostiantynbryl/BrylTab-Bouncer-Glass",
+      "language": "Java",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-12T13:18:31Z",
+      "pushed_at": "2026-08-12T13:18:04Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "CutFlow-Batch",
+      "html_url": "https://github.com/kostiantynbryl/CutFlow-Batch",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-10T11:39:43Z",
+      "pushed_at": "2026-08-10T11:39:33Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "ClearUp",
+      "html_url": "https://github.com/kostiantynbryl/ClearUp",
+      "language": "Kotlin",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-07T14:32:50Z",
+      "pushed_at": "2026-08-07T14:33:22Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "Norvexa-OneStep",
+      "html_url": "https://github.com/kostiantynbryl/Norvexa-OneStep",
+      "language": "Kotlin",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-07T14:07:34Z",
+      "pushed_at": "2026-08-07T14:05:53Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "LumaBay",
+      "html_url": "https://github.com/kostiantynbryl/LumaBay",
+      "language": null,
+      "stargazers_count": 0,
+      "updated_at": "2026-08-02T22:56:34Z",
+      "pushed_at": "2026-08-03T21:57:21Z",
+      "description": " Luma Bay: Match & Restore Norvexa Games",
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "Norvexa-Reader",
+      "html_url": "https://github.com/kostiantynbryl/Norvexa-Reader",
+      "language": null,
+      "stargazers_count": 0,
+      "updated_at": "2026-08-02T09:59:26Z",
+      "pushed_at": "2026-08-02T09:59:11Z",
+      "description": null,
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "site",
+      "html_url": "https://github.com/kostiantynbryl/site",
+      "language": "HTML",
+      "stargazers_count": 0,
+      "updated_at": "2026-07-31T11:01:58Z",
+      "pushed_at": "2026-08-13T17:25:26Z",
+      "description": "test site",
+      "homepage": null,
+      "archived": false
+    },
+    {
+      "name": "kostiantynbryl.githab.io",
+      "html_url": "https://github.com/kostiantynbryl/kostiantynbryl.githab.io",
+      "language": null,
+      "stargazers_count": 0,
+      "updated_at": "2026-04-27T13:22:11Z",
+      "pushed_at": "2026-04-27T13:21:52Z",
+      "description": "test site",
+      "homepage": null,
+      "archived": false
+    }
   ]
 }
