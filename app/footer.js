@@ -1,7 +1,7 @@
 (()=>{
   const A=window.KB_APP,I=window.KB_I18N;if(!A||!I)return;
   function render(){
-    const f=document.getElementById('mpFooter');if(!f)return;
+    const f=document.getElementById('mpFooter');if(!f)return;f.className='mp-footer';
     f.innerHTML=`<div class="shell mp-footer-grid">
       <div class="mp-footer-brand">
         <img src="${A.path('assets/kb.svg')}" alt="" width="34" height="34">
