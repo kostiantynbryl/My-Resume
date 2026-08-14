@@ -25,19 +25,19 @@ jobs:
           npx http-server . -p 4173 -c-1 > /tmp/portfolio-server.log 2>&1 &
           echo $! > /tmp/portfolio-server.pid
           sleep 2
+      - name: Check modular Header Main Footer and Chinese coverage
+        run: node scripts/modular_i18n_smoke.mjs
       - name: Check 375 / 430 / 768 / 1024 layouts
         run: node scripts/mobile_smoke.mjs
       - name: Check RU / UA / PL desktop localization
         run: node scripts/localization_smoke.mjs
-      - name: Check Chinese and personal branding
-        run: node scripts/chinese_personal_smoke.mjs
       - name: Upload responsive screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: responsive-visual-qa
           path: |
+            artifacts/modular-i18n-qa
             artifacts/visual-qa
             artifacts/localization-qa
-            artifacts/chinese-personal-qa
           if-no-files-found: warn

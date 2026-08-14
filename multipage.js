@@ -1,40 +1,38 @@
 (()=>{
   const base=new URL('.',document.currentScript.src);
-  const rev='1.3.0';
+  const rev='1.4.0';
 
-  // Apply the saved language as early as possible so browsers and assistive tech see the correct locale.
+  // Apply the preferred locale before the first render to prevent language flashes.
   try{
+    const q=new URLSearchParams(location.search).get('lang');
     const ext=localStorage.getItem('resume-lang-ext');
-    const saved=localStorage.getItem('resume-lang');
-    if(ext==='zh')document.documentElement.lang='zh-CN';
-    else if(['en','pl','ru','uk'].includes(saved))document.documentElement.lang=saved;
+    const saved=q||(ext==='zh'?'zh':localStorage.getItem('resume-lang'))||'';
+    const l=String(saved).toLowerCase();
+    if(l.startsWith('zh'))document.documentElement.lang='zh-CN';
+    else if(['en','pl','ru','uk'].includes(l))document.documentElement.lang=l;
   }catch{}
 
-  // Internal proof/build widgets are not part of the public resume.
-  const internalSelectors=['#v12Infra','#v12Shipping','.v11-build','.v11-build-dialog'];
-  const guard=document.createElement('style');
-  guard.id='public-resume-guard';
-  guard.textContent=internalSelectors.join(',')+'{display:none!important}';
-  document.head.appendChild(guard);
-  const stripInternal=()=>internalSelectors.forEach(sel=>document.querySelectorAll(sel).forEach(node=>node.remove()));
-  const observer=new MutationObserver(stripInternal);
-  observer.observe(document.documentElement,{childList:true,subtree:true});
-  stripInternal();
-
-  const css=document.createElement('link');
-  css.rel='stylesheet';
-  css.href=new URL(`polish-v121.css?v=${rev}`,base).href;
-  document.head.appendChild(css);
-
-  const load=(name,done)=>{
-    const s=document.createElement('script');
-    s.src=new URL(`${name}?v=${rev}`,base).href;
-    s.defer=true;
-    if(done)s.onload=done;
-    document.head.appendChild(s);
+  const addCss=name=>{
+    if(document.querySelector(`link[data-kb-css="${name}"]`))return;
+    const l=document.createElement('link');l.rel='stylesheet';l.dataset.kbCss=name;l.href=new URL(`${name}?v=${rev}`,base).href;document.head.appendChild(l);
   };
-  const home=document.body?.dataset.page==='home';
-  const finish=()=>load('polish-v121.js',()=>load('polish-v121-lexicon.js',()=>load('polish-v121-pages.js',()=>load('polish-v121-final.js',()=>load('zh-v13-ui.js',()=>load('personal-v13.js',()=>{stripInternal();if(!home)load('analytics-v12.js')}))))));
-  const core=()=>load('zh-v13-data.js',()=>load('pre-v11.js',()=>load('multipage-core.js',()=>load('final-v1.js',()=>load('a11y-v1.js',()=>load('easter-v1.js',()=>load('pro-v11.js',()=>home?load('proof-v12-home.js',finish):load('proof-v12.js',finish))))))));
-  if(home)load('pro-v11-data.js',core);else load('proof-v12-data.js',()=>load('pro-v11-data.js',core));
+  ['pro-v11.css','proof-v12.css','polish-v121.css','app/app.css'].forEach(addCss);
+
+  const scripts=[
+    'pro-v11-data.js',
+    'proof-v12-data.js',
+    'zh-v13-data.js',
+    'app/core.js',
+    'app/i18n.js',
+    'app/header.js',
+    'app/main.js',
+    'app/footer.js',
+    'app/utilities.js',
+    'app/bootstrap.js'
+  ];
+  const load=i=>{
+    if(i>=scripts.length)return;
+    const s=document.createElement('script');s.src=new URL(`${scripts[i]}?v=${rev}`,base).href;s.onload=()=>load(i+1);s.onerror=()=>console.error('Portfolio module failed:',scripts[i]);document.head.appendChild(s);
+  };
+  load(0);
 })();
