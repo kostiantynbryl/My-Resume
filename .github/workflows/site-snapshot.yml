@@ -38,4 +38,5 @@ jobs:
           git add data/github.json data/build.json assets/profile.webp assets/gallery assets/og '*.html' */index.html work/*/index.html
           git diff --cached --quiet && exit 0
           git commit -m 'build: refresh portfolio snapshot and social cards [skip ci]'
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
