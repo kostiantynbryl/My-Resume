@@ -84,13 +84,39 @@ jobs:
           npm install --global @lhci/cli@0.15.x
           lhci autorun --config=lighthouserc.cjs
 
+      - name: Lighthouse diagnostics
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const dir='.lighthouseci-reports';
+          if(!fs.existsSync(dir)){console.log('No Lighthouse report directory');process.exit(0)}
+          const file=fs.readdirSync(dir).find(f=>f.endsWith('.report.json'))||fs.readdirSync(dir).find(f=>f.endsWith('.json'));
+          if(!file){console.log('No Lighthouse JSON report');process.exit(0)}
+          const r=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+          console.log('SCORES',Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])));
+          const categories=['accessibility','performance'];
+          for(const cat of categories){
+            console.log(`--- ${cat.toUpperCase()} ---`);
+            for(const ref of r.categories[cat].auditRefs){
+              const a=r.audits[ref.id];
+              if(a && a.scoreDisplayMode!=='notApplicable' && a.score!==1){
+                console.log(`${ref.id}: score=${a.score} | ${a.title} | ${a.displayValue||''}`);
+                if(a.details?.items?.length){
+                  for(const item of a.details.items.slice(0,8)) console.log('  ',JSON.stringify(item).slice(0,700));
+                }
+              }
+            }
+          }
+          NODE
+
       - name: Upload Lighthouse report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-report
           path: .lighthouseci-reports
-          if-no-files-found: error
+          if-no-files-found: warn
           include-hidden-files: true
 
       - name: Enforce Lighthouse threshold
