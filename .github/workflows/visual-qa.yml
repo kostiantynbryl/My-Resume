@@ -1,0 +1,36 @@
+name: Responsive visual QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install browser tools
+        run: |
+          npm install --no-save playwright@1.55.0 http-server@14.1.1
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          npx http-server . -p 4173 -c-1 > /tmp/portfolio-server.log 2>&1 &
+          echo $! > /tmp/portfolio-server.pid
+          sleep 2
+      - name: Check 375 / 430 / 768 / 1024 layouts
+        run: node scripts/mobile_smoke.mjs
+      - name: Upload responsive screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-visual-qa
+          path: artifacts/visual-qa
+          if-no-files-found: warn

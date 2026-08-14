@@ -1,0 +1,12 @@
+{
+  "version": "1.2",
+  "canonical_base": "https://kostiantynbryl.github.io/My-Resume/",
+  "custom_domain": null,
+  "analytics_endpoint": null,
+  "analytics_policy": {
+    "cookies": false,
+    "user_ids": false,
+    "respect_gpc": true,
+    "respect_dnt": true
+  }
+}
