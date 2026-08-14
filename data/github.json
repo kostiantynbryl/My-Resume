@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T10:59:31.735061+00:00",
+  "generated_at": "2026-08-14T11:02:24.179455+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,15 +11,15 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-14T10:19:03Z",
-      "pushed_at": "2026-08-14T10:59:13Z",
+      "updated_at": "2026-08-14T10:59:47Z",
+      "pushed_at": "2026-08-14T11:02:11Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "48ef07f7acaa",
-        "message": "v1.2 — Proof & Conversion",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/48ef07f7acaa3e5fcddb19df28298d05676f76a0"
+        "sha": "7ba4f761b27f",
+        "message": "ci: reduce Lighthouse runner variance without lowering thresholds",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/7ba4f761b27f1403ec63327223a1f9f15a2b0b13"
       }
     },
     {
