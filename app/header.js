@@ -6,7 +6,7 @@
   const active=id=>A.page===id||(A.page==='project'&&id==='work')||(A.page==='audience'&&id==='home');
   const langs=()=>I.supported.map(x=>`<button type="button" data-kb-lang="${x}" class="${x===I.lang?'active':''}" aria-pressed="${x===I.lang}">${I.labels[x]}</button>`).join('');
   function render(){
-    const h=document.getElementById('mpHeader');if(!h)return;
+    const h=document.getElementById('mpHeader');if(!h)return;h.className='mp-header';
     h.innerHTML=`<div class="shell mp-header-row">
       <a class="mp-brand" id="mpBrand" href="${A.path('')}" aria-label="Kostiantyn Bryl — ${I.t('brand')}">
         <img src="${A.path('assets/kb.svg')}" alt="" width="38" height="38">
