@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T15:50:11.135858+00:00",
+  "generated_at": "2026-08-14T18:21:58.437134+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,15 +11,15 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-14T15:35:32Z",
-      "pushed_at": "2026-08-14T15:49:50Z",
+      "updated_at": "2026-08-14T15:51:21Z",
+      "pushed_at": "2026-08-14T18:21:40Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "519b9ecdce36",
-        "message": "v1.2.2 — Remove internal proof/build UI",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/519b9ecdce3615edf1308476a8dd565f361f6299"
+        "sha": "e251cfd3353c",
+        "message": "v1.3: personal portfolio identity and Simplified Chinese",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/e251cfd3353c6664a0e5c9880a3ec69ec81cf1a0"
       }
     },
     {
