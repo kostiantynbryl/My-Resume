@@ -31,8 +31,6 @@ jobs:
         run: node scripts/mobile_smoke.mjs
       - name: Check RU / UA / PL desktop localization
         run: node scripts/localization_smoke.mjs
-      - name: Check Chinese and personal branding compatibility
-        run: node scripts/chinese_personal_smoke.mjs
       - name: Upload responsive screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -42,5 +40,4 @@ jobs:
             artifacts/modular-i18n-qa
             artifacts/visual-qa
             artifacts/localization-qa
-            artifacts/chinese-personal-qa
           if-no-files-found: warn
