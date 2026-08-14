@@ -1,1 +1,0 @@
-/* NORVEXA portfolio worker shell */
