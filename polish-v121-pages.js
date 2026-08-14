@@ -1,0 +1,16 @@
+(()=>{
+const PAGE=document.body.dataset.page||'';
+const lang=()=>document.documentElement.lang==='uk'?'uk':(['pl','ru'].includes(document.documentElement.lang)?document.documentElement.lang:'en');
+const P={
+ en:{eyebrow:{work:'NORVEXA / WORK',experience:'CAREER / EXPERIENCE',cases:'PRODUCT / CASE STUDIES',about:'PROFILE / ABOUT',now:'NOW / AUG 2026',contact:'CONNECT / DIRECT'},contact:['KOSTIANTYN BRYL / CONNECT','Product · Operations · Software · Automation','Direct channels only. No contact-form tracking layer.','Email','Resume QR','Scan to open the latest published version of this portfolio.']},
+ pl:{eyebrow:{work:'NORVEXA / PROJEKTY',experience:'KARIERA / DOŚWIADCZENIE',cases:'PRODUKT / CASE STUDIES',about:'PROFIL / O MNIE',now:'TERAZ / SIE 2026',contact:'KONTAKT / BEZPOŚREDNIO'},contact:['KOSTIANTYN BRYL / KONTAKT','Produkt · Operacje · Oprogramowanie · Automatyzacja','Tylko bezpośrednie kanały. Bez formularza i warstwy śledzącej.','E-mail','QR PORTFOLIO','Zeskanuj, aby otworzyć najnowszą opublikowaną wersję portfolio.']},
+ ru:{eyebrow:{work:'NORVEXA / ПРОЕКТЫ',experience:'КАРЬЕРА / ОПЫТ',cases:'ПРОДУКТ / КЕЙСЫ',about:'ПРОФИЛЬ / ОБО МНЕ',now:'СЕЙЧАС / АВГ 2026',contact:'КОНТАКТЫ / НАПРЯМУЮ'},contact:['KOSTIANTYN BRYL / КОНТАКТЫ','Продукт · Операции · Разработка · Автоматизация','Только прямые каналы. Без контактной формы и лишнего отслеживания.','Почта','QR ПОРТФОЛИО','Отсканируйте, чтобы открыть последнюю опубликованную версию портфолио.']},
+ uk:{eyebrow:{work:'NORVEXA / ПРОЄКТИ',experience:'КАР’ЄРА / ДОСВІД',cases:'ПРОДУКТ / КЕЙСИ',about:'ПРОФІЛЬ / ПРО МЕНЕ',now:'ЗАРАЗ / СЕР 2026',contact:'КОНТАКТИ / НАПРЯМУ'},contact:['KOSTIANTYN BRYL / КОНТАКТИ','Продукт · Операції · Розробка · Автоматизація','Лише прямі канали. Без контактної форми та зайвого відстеження.','Пошта','QR ПОРТФОЛІО','Відскануйте, щоб відкрити останню опубліковану версію портфоліо.']}
+};
+function text(el,v){if(el&&v!=null)el.textContent=v}
+function patch(){const d=P[lang()]||P.en;const hero=document.querySelector('.mp-page-hero>.mp-eyebrow');if(hero&&d.eyebrow[PAGE])text(hero,d.eyebrow[PAGE]);if(PAGE==='contact'){const primary=document.querySelector('.mp-contact-primary'),secondary=document.querySelector('.mp-contact-secondary');text(primary?.querySelector('.mp-eyebrow'),d.contact[0]);text(primary?.querySelector('h2'),d.contact[1]);text(primary?.querySelector('h2+p'),d.contact[2]);const first=primary?.querySelector('.mp-contact-list a[href^="mailto:"]');if(first){const span=first.querySelector('span');first.childNodes[0].nodeValue=d.contact[3]+' ';if(span)span.textContent='↗'}text(secondary?.querySelector('h3'),d.contact[4]);text(secondary?.querySelector('p'),d.contact[5]);const img=secondary?.querySelector('img');if(img)img.alt=d.contact[4]}
+}
+function schedule(){[120,650,1150].forEach(ms=>setTimeout(patch,ms))}
+document.addEventListener('click',e=>{if(e.target.closest('[data-lang]')){setTimeout(patch,220);setTimeout(patch,700)}},true);
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',schedule,{once:true}):schedule();
+})();
