@@ -30,25 +30,18 @@ jobs:
           test -f proof-v12.css
           test -f polish-v121.css
           test -f multipage.js
-          test -f multipage-core.js
-          test -f final-v1.js
-          test -f a11y-v1.js
-          test -f easter-v1.js
-          test -f pre-v11.js
-          test -f pro-v11-data.js
-          test -f pro-v11.js
-          test -f proof-v12-data.js
-          test -f proof-v12.js
-          test -f proof-v12-home.js
-          test -f polish-v121.js
-          test -f polish-v121-lexicon.js
-          test -f polish-v121-pages.js
-          test -f polish-v121-final.js
-          test -f zh-v13-data.js
-          test -f zh-v13-ui.js
-          test -f personal-v13.js
-          test -f analytics-v12.js
           test -f portfolio-data.js
+          test -f pro-v11-data.js
+          test -f proof-v12-data.js
+          test -f zh-v13-data.js
+          test -f app/core.js
+          test -f app/i18n.js
+          test -f app/header.js
+          test -f app/main.js
+          test -f app/footer.js
+          test -f app/utilities.js
+          test -f app/bootstrap.js
+          test -f app/app.css
           test -f site.config.json
           test -f data/github.json
           test -f assets/kb.svg
@@ -60,6 +53,9 @@ jobs:
           test -f contact/index.html
           test -f ecosystem/index.html
           test -f system/index.html
+          test -f recruiter/index.html
+          test -f engineering/index.html
+          test -f product/index.html
           test -f 404.html
           test -f robots.txt
           test -f sitemap.xml
@@ -74,37 +70,42 @@ jobs:
           test -f scripts/mobile_smoke.mjs
           test -f scripts/localization_smoke.mjs
           test -f scripts/chinese_personal_smoke.mjs
+          test -f scripts/modular_i18n_smoke.mjs
 
       - name: JavaScript, Python and config syntax
         run: |
           node --check multipage.js
-          node --check multipage-core.js
-          node --check final-v1.js
-          node --check a11y-v1.js
-          node --check easter-v1.js
-          node --check pre-v11.js
-          node --check pro-v11-data.js
-          node --check pro-v11.js
-          node --check proof-v12-data.js
-          node --check proof-v12.js
-          node --check proof-v12-home.js
-          node --check polish-v121.js
-          node --check polish-v121-lexicon.js
-          node --check polish-v121-pages.js
-          node --check polish-v121-final.js
-          node --check zh-v13-data.js
-          node --check zh-v13-ui.js
-          node --check personal-v13.js
-          node --check analytics-v12.js
           node --check portfolio-data.js
+          node --check pro-v11-data.js
+          node --check proof-v12-data.js
+          node --check zh-v13-data.js
+          node --check app/core.js
+          node --check app/i18n.js
+          node --check app/header.js
+          node --check app/main.js
+          node --check app/footer.js
+          node --check app/utilities.js
+          node --check app/bootstrap.js
           node --check scripts/mobile_smoke.mjs
           node --check scripts/localization_smoke.mjs
           node --check scripts/chinese_personal_smoke.mjs
+          node --check scripts/modular_i18n_smoke.mjs
           python -m py_compile cv/generate.py cv/generate_roles.py cv/generate_zh.py scripts/site_snapshot.py scripts/personal_meta.py
           python - <<'PY'
           import json
           json.load(open('site.config.json',encoding='utf-8'))
           print('site.config.json OK')
+          PY
+
+      - name: Ensure legacy UI layers are not loaded
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text=Path('multipage.js').read_text(encoding='utf-8')
+          forbidden=['multipage-core.js','final-v1.js','a11y-v1.js','easter-v1.js','pre-v11.js','pro-v11.js','proof-v12.js','proof-v12-home.js','polish-v121.js','polish-v121-lexicon.js','polish-v121-pages.js','polish-v121-final.js','zh-v13-ui.js','personal-v13.js']
+          bad=[x for x in forbidden if repr(x) in text or f"'{x}'" in text or f'"{x}"' in text]
+          if bad: raise SystemExit('Legacy UI runtime references found: '+', '.join(bad))
+          print('Modular runtime only')
           PY
 
       - name: Generate all recruiter PDFs
