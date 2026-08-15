@@ -17,7 +17,7 @@
   // and remove the redundant floating recruiter dock that would cover the card.
   const lowHeight=document.createElement('style');
   lowHeight.dataset.kbLowHeight='v152';
-  lowHeight.textContent=`@media (min-width:981px) and (max-height:760px){
+  lowHeight.textContent=`@media (min-width:981px) and (max-height:800px){
     .mp-hero{min-height:auto!important;padding-top:14px!important;padding-bottom:24px!important;gap:clamp(36px,6vw,78px)!important}
     .mp-hero-copy{padding-top:0!important}
     .mp-hero h1{font-size:clamp(58px,5.8vw,78px)!important;line-height:.90!important;margin:10px 0 14px!important;max-width:790px!important}
