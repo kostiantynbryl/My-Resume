@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T10:24:19.484348+00:00",
+  "generated_at": "2026-08-15T13:43:46.481072+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,15 +11,15 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-15T10:24:03Z",
-      "pushed_at": "2026-08-15T10:23:59Z",
+      "updated_at": "2026-08-15T10:24:30Z",
+      "pushed_at": "2026-08-15T13:43:31Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "ab055804670c",
-        "message": "Remove compact layout shift",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/ab055804670c9cdac3e75771ab22b2e0c222c389"
+        "sha": "21fb8b220f92",
+        "message": "Fit hero on low-height desktop screens",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/21fb8b220f92d04aa56a9a04e71b18e3de307270"
       }
     },
     {
