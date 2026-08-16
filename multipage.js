@@ -1,6 +1,6 @@
 (()=>{
   const base=new URL('.',document.currentScript.src);
-  const rev='1.6.0';
+  const rev='1.7.0';
 
   // Apply the preferred locale before the first render to prevent language flashes.
   try{
@@ -16,7 +16,7 @@
     if(document.querySelector(`link[data-kb-css="${name}"]`))return;
     const l=document.createElement('link');l.rel='stylesheet';l.dataset.kbCss=name;l.href=new URL(`${name}?v=${rev}`,base).href;document.head.appendChild(l);
   };
-  ['pro-v11.css','proof-v12.css','polish-v121.css','app/app.css'].forEach(addCss);
+  ['pro-v11.css','proof-v12.css','polish-v121.css','app/app.css','app/action-dock.css'].forEach(addCss);
 
   const scripts=[
     'pro-v11-data.js',
@@ -29,6 +29,7 @@
     'app/footer.js',
     'app/profile-card.js',
     'app/utilities.js',
+    'app/action-dock.js',
     'app/bootstrap.js'
   ];
   const load=i=>{
