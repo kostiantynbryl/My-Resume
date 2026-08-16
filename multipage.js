@@ -16,7 +16,7 @@
     if(document.querySelector(`link[data-kb-css="${name}"]`))return;
     const l=document.createElement('link');l.rel='stylesheet';l.dataset.kbCss=name;l.href=new URL(`${name}?v=${rev}`,base).href;document.head.appendChild(l);
   };
-  ['pro-v11.css','proof-v12.css','polish-v121.css','app/app.css','app/profile-card.css'].forEach(addCss);
+  ['pro-v11.css','proof-v12.css','polish-v121.css','app/app.css'].forEach(addCss);
 
   const scripts=[
     'pro-v11-data.js',
