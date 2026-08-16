@@ -25,11 +25,14 @@ async function open(path,name,expected=[]){
   if(breadcrumb.includes('NORVEXA / ABOUT')||breadcrumb.startsWith('NORVEXA'))throw new Error(`${path}: legacy NORVEXA breadcrumb leaked`);
   const scripts=await page.evaluate(()=>performance.getEntriesByType('resource').map(x=>x.name.split('?')[0].split('/').pop()).filter(Boolean));
   for(const old of forbidden)if(scripts.includes(old))throw new Error(`${path}: legacy UI runtime loaded: ${old}`);
-  for(const required of ['core.js','i18n.js','header.js','main.js','footer.js','utilities.js','bootstrap.js'])if(!scripts.includes(required))throw new Error(`${path}: modular runtime missing ${required}`);
+  for(const required of ['core.js','i18n.js','header.js','main.js','footer.js','profile-card.js','utilities.js','bootstrap.js'])if(!scripts.includes(required))throw new Error(`${path}: modular runtime missing ${required}`);
   await page.screenshot({path:`${out}/${name}.png`,fullPage:true});
 }
 
-await open('/','home',['将复杂工作转化','我能为业务做什么','重点案例','证据与结果']);
+await open('/','home',['将复杂工作转化','我能为业务做什么','重点案例','证据与结果','我构建实用的数字产品','年经验','团队规模','语言','项目','下载简历']);
+const profile=page.locator('.kb-profile-card');
+if(await profile.count()!==1)throw new Error('Home: modular profile card missing');
+if(await page.locator('.home-short .mp-metrics').isVisible())throw new Error('Home: duplicate metric strip is still visible');
 await open('/work/','work',['四个方向，一套产品方法。','围绕实用工作流程构建的 Android、Windows 与 Web 产品。','积极开发中']);
 await open('/experience/','experience',['跨越技术与运营的职业经历。','电信工程师','国际订单负责人']);
 await open('/case-studies/','cases',['在真实约束下做出的决策。','问题','方法','结果']);
@@ -49,4 +52,4 @@ await open('/work/telemanage/','telemanage',['内容运营平台']);
 await open('/work/bryltab/','bryltab',['SystemUI','设备','架构']);
 
 await browser.close();
-console.log('Modular Header/Main/Footer + five-language Chinese QA passed.');
+console.log('Modular Header/Main/Footer/ProfileCard + five-language Chinese QA passed.');

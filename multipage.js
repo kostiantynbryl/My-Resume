@@ -1,6 +1,6 @@
 (()=>{
   const base=new URL('.',document.currentScript.src);
-  const rev='1.5.4';
+  const rev='1.6.0';
 
   // Apply the preferred locale before the first render to prevent language flashes.
   try{
@@ -27,6 +27,7 @@
     'app/header.js',
     'app/main.js',
     'app/footer.js',
+    'app/profile-card.js',
     'app/utilities.js',
     'app/bootstrap.js'
   ];
