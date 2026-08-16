@@ -10,43 +10,32 @@
     zh:{summary:'我构建实用的数字产品、优化运营，并把复杂工作转化为清晰可用的系统。',metrics:['年经验','团队规模','语言','项目'],tags:['产品','运营','自动化','软件','AI','可访问性'],cv:'下载简历',email:'邮件'}
   };
 
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const getOrCreate=(card,selector,tag,className)=>{
-    let el=card.querySelector(selector);
-    if(!el){el=document.createElement(tag);el.className=className}
-    return el;
-  };
-
   function render(){
     if(A.page!=='home')return;
-    const card=document.querySelector('.mp-identity');
+    const card=document.querySelector('.kb-profile-card');
     if(!card)return;
-    const lang=I.lang,t=copy[lang]||copy.en;
-    const projects=Array.isArray(D?.projects)?D.projects.length:0;
-    const metricValues=['10+','20','5',String(projects||'9')];
-    const top=card.querySelector('.mp-identity-top');
-    const photo=card.querySelector('.mp-photo-wrap');
-    const title=card.querySelector('.mp-id-copy');
-    const metrics=card.querySelector('.mp-id-facts');
-    if(!top||!photo||!title||!metrics)return;
+    const t=copy[I.lang]||copy.en;
+    const projects=Array.isArray(D?.projects)?D.projects.length:9;
+    const values=['10+','20','5',String(projects||9)];
 
-    card.classList.add('kb-profile-card');
-    top.classList.add('kb-profile-top');
-    photo.classList.add('kb-profile-photo');
-    title.classList.add('kb-profile-title');
-    metrics.classList.add('kb-profile-metrics');
+    const summary=card.querySelector('.kb-profile-summary');
+    if(summary&&summary.textContent!==t.summary)summary.textContent=t.summary;
 
-    const summary=getOrCreate(card,'.kb-profile-summary','p','kb-profile-summary');
-    const tags=getOrCreate(card,'.kb-profile-tags','div','kb-profile-tags');
-    const actions=getOrCreate(card,'.kb-profile-actions','div','kb-profile-actions');
-    summary.textContent=t.summary;
-    metrics.innerHTML=metricValues.map((v,i)=>`<div><b>${esc(v)}</b><span>${esc(t.metrics[i])}</span></div>`).join('');
-    tags.setAttribute('aria-label','Capabilities');
-    tags.innerHTML=t.tags.map(x=>`<span>${esc(x)}</span>`).join('');
-    actions.innerHTML=`<button type="button" data-kb-profile-cv>${esc(t.cv)}</button><a href="https://t.me/kostiantynbryl" target="_blank" rel="noreferrer">Telegram</a><a href="mailto:kostiantynbryl@gmail.com">${esc(t.email)}</a>`;
+    const metricItems=[...card.querySelectorAll('.kb-profile-metrics>div')];
+    metricItems.forEach((item,i)=>{
+      const b=item.querySelector('b'),span=item.querySelector('span');
+      if(b&&b.textContent!==values[i])b.textContent=values[i];
+      if(span&&span.textContent!==t.metrics[i])span.textContent=t.metrics[i];
+    });
 
-    card.append(top,photo,title,summary,metrics,tags,actions);
-    actions.querySelector('[data-kb-profile-cv]')?.addEventListener('click',()=>document.getElementById('homeCv')?.click());
+    const tagItems=[...card.querySelectorAll('.kb-profile-tags span')];
+    tagItems.forEach((tag,i)=>{if(t.tags[i]&&tag.textContent!==t.tags[i])tag.textContent=t.tags[i]});
+
+    const cv=card.querySelector('[data-kb-profile-cv]');
+    const email=card.querySelector('.kb-profile-actions a[href^="mailto:"]');
+    if(cv&&cv.textContent!==t.cv)cv.textContent=t.cv;
+    if(email&&email.textContent!==t.email)email.textContent=t.email;
+    if(cv&&!cv.dataset.bound){cv.dataset.bound='1';cv.addEventListener('click',()=>document.getElementById('homeCv')?.click())}
   }
 
   window.KB_PROFILE={render};
