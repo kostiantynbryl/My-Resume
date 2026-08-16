@@ -39,6 +39,8 @@ jobs:
           test -f app/header.js
           test -f app/main.js
           test -f app/footer.js
+          test -f app/profile-card.js
+          test -f app/profile-card.css
           test -f app/utilities.js
           test -f app/bootstrap.js
           test -f app/app.css
@@ -84,6 +86,7 @@ jobs:
           node --check app/header.js
           node --check app/main.js
           node --check app/footer.js
+          node --check app/profile-card.js
           node --check app/utilities.js
           node --check app/bootstrap.js
           node --check scripts/mobile_smoke.mjs
