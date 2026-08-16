@@ -1,0 +1,86 @@
+/* Floating portfolio actions v1.0 */
+#v12Dock{display:none!important}
+
+#kbContactDock.kb-action-dock{
+  position:fixed!important;
+  left:auto!important;
+  right:18px!important;
+  bottom:18px!important;
+  z-index:190!important;
+  display:flex!important;
+  width:auto!important;
+  max-width:calc(100vw - 36px);
+  align-items:center;
+  justify-content:flex-end!important;
+  gap:6px;
+  padding:7px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:blur(20px) saturate(1.2);
+  backdrop-filter:blur(20px) saturate(1.2);
+  box-shadow:0 16px 48px rgba(0,0,0,.28);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(14px) scale(.975);
+  transform-origin:100% 100%;
+  transition:opacity .22s ease,transform .22s ease,visibility .22s ease;
+}
+#kbContactDock.kb-action-dock.is-visible{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:none;
+}
+#kbContactDock.kb-action-dock>a,
+#kbContactDock.kb-action-dock>button{
+  flex:0 0 auto!important;
+  display:inline-flex;
+  min-height:40px;
+  align-items:center;
+  justify-content:center;
+  padding:0 13px!important;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--text);
+  font:800 9px/1 system-ui;
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+#kbContactDock.kb-action-dock>a:hover,
+#kbContactDock.kb-action-dock>button:hover{transform:translateY(-1px);border-color:var(--line2)}
+#kbContactDock.kb-action-dock>.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+@media(max-width:760px){
+  #kbContactDock.kb-action-dock{
+    left:auto!important;
+    right:10px!important;
+    bottom:10px!important;
+    width:auto!important;
+    max-width:calc(100vw - 20px);
+    gap:4px;
+    padding:5px;
+    border-radius:14px;
+  }
+  #kbContactDock.kb-action-dock>a,
+  #kbContactDock.kb-action-dock>button{
+    flex:0 0 auto!important;
+    min-height:38px;
+    padding:0 10px!important;
+    font-size:8px;
+  }
+}
+@media(max-width:390px){
+  #kbContactDock.kb-action-dock>a,
+  #kbContactDock.kb-action-dock>button{padding-inline:8px!important;font-size:7.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  #kbContactDock.kb-action-dock{transition:none;transform:none}
+  #kbContactDock.kb-action-dock>a:hover,
+  #kbContactDock.kb-action-dock>button:hover{transform:none}
+}
+@media print{#kbContactDock.kb-action-dock{display:none!important}}
