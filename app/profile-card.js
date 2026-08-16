@@ -11,32 +11,42 @@
   };
 
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const getOrCreate=(card,selector,tag,className)=>{
+    let el=card.querySelector(selector);
+    if(!el){el=document.createElement(tag);el.className=className}
+    return el;
+  };
 
   function render(){
     if(A.page!=='home')return;
     const card=document.querySelector('.mp-identity');
     if(!card)return;
-    const lang=I.lang, t=copy[lang]||copy.en;
+    const lang=I.lang,t=copy[lang]||copy.en;
     const projects=Array.isArray(D?.projects)?D.projects.length:0;
     const metricValues=['10+','20','5',String(projects||'9')];
+    const top=card.querySelector('.mp-identity-top');
+    const photo=card.querySelector('.mp-photo-wrap');
+    const title=card.querySelector('.mp-id-copy');
+    const metrics=card.querySelector('.mp-id-facts');
+    if(!top||!photo||!title||!metrics)return;
+
     card.classList.add('kb-profile-card');
-    card.innerHTML=`
-      <div class="kb-profile-photo">
-        <img src="${A.path('assets/profile.webp')}" alt="Kostiantyn Bryl" width="520" height="360" fetchpriority="high" decoding="async">
-        <div class="kb-profile-top"><span>KB / 2026</span><b>${esc(I.t('available'))}</b></div>
-      </div>
-      <div class="kb-profile-body">
-        <div class="kb-profile-title"><h2>Kostiantyn Bryl</h2><p>${esc(I.t('profile'))}</p></div>
-        <p class="kb-profile-summary">${esc(t.summary)}</p>
-        <div class="kb-profile-metrics">${metricValues.map((v,i)=>`<div><b>${esc(v)}</b><span>${esc(t.metrics[i])}</span></div>`).join('')}</div>
-        <div class="kb-profile-tags" aria-label="Capabilities">${t.tags.map(x=>`<span>${esc(x)}</span>`).join('')}</div>
-        <div class="kb-profile-actions">
-          <button type="button" data-kb-profile-cv>${esc(t.cv)}</button>
-          <a href="https://t.me/kostiantynbryl" target="_blank" rel="noreferrer">Telegram</a>
-          <a href="mailto:kostiantynbryl@gmail.com">${esc(t.email)}</a>
-        </div>
-      </div>`;
-    card.querySelector('[data-kb-profile-cv]')?.addEventListener('click',()=>document.getElementById('homeCv')?.click());
+    top.classList.add('kb-profile-top');
+    photo.classList.add('kb-profile-photo');
+    title.classList.add('kb-profile-title');
+    metrics.classList.add('kb-profile-metrics');
+
+    const summary=getOrCreate(card,'.kb-profile-summary','p','kb-profile-summary');
+    const tags=getOrCreate(card,'.kb-profile-tags','div','kb-profile-tags');
+    const actions=getOrCreate(card,'.kb-profile-actions','div','kb-profile-actions');
+    summary.textContent=t.summary;
+    metrics.innerHTML=metricValues.map((v,i)=>`<div><b>${esc(v)}</b><span>${esc(t.metrics[i])}</span></div>`).join('');
+    tags.setAttribute('aria-label','Capabilities');
+    tags.innerHTML=t.tags.map(x=>`<span>${esc(x)}</span>`).join('');
+    actions.innerHTML=`<button type="button" data-kb-profile-cv>${esc(t.cv)}</button><a href="https://t.me/kostiantynbryl" target="_blank" rel="noreferrer">Telegram</a><a href="mailto:kostiantynbryl@gmail.com">${esc(t.email)}</a>`;
+
+    card.append(top,photo,title,summary,metrics,tags,actions);
+    actions.querySelector('[data-kb-profile-cv]')?.addEventListener('click',()=>document.getElementById('homeCv')?.click());
   }
 
   window.KB_PROFILE={render};
