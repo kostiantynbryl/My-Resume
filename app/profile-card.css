@@ -1,6 +1,6 @@
 /* Informative profile card v1.6 */
 body:not(.kb-ready) .mp-identity{visibility:hidden}
-.home-short>.mp-metrics{display:none}
+.home-short .mp-metrics{display:none}
 
 .mp-identity.kb-profile-card{
   display:flex;flex-direction:column;align-self:start;justify-self:end;
