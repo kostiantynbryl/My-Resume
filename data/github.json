@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T14:31:22.924670+00:00",
+  "generated_at": "2026-08-16T18:31:57.692352+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,15 +11,15 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-16T13:00:07Z",
-      "pushed_at": "2026-08-16T14:31:09Z",
+      "updated_at": "2026-08-16T14:31:45Z",
+      "pushed_at": "2026-08-16T18:31:42Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "66dc8de76c44",
-        "message": "Use portrait profile card and delayed floating actions",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/66dc8de76c442504b12b6321f365ec77cb7455d8"
+        "sha": "ae44050a19f6",
+        "message": "Finalize compact portrait profile card",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/ae44050a19f6015ad1a5d3fedda3a87ed79049b5"
       }
     },
     {
