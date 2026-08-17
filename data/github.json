@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T05:50:06.483223+00:00",
+  "generated_at": "2026-08-17T07:00:06.282961+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 10,
@@ -11,15 +11,15 @@
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-16T18:32:05Z",
-      "pushed_at": "2026-08-16T18:32:01Z",
+      "updated_at": "2026-08-17T05:50:16Z",
+      "pushed_at": "2026-08-17T06:59:48Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "50e5c010b59b",
-        "message": "build: refresh personal portfolio snapshot and social cards [skip ci]",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/50e5c010b59b0a53a2d4316982d49ed65db83899"
+        "sha": "c223675ee8c0",
+        "message": "Expand profile metrics across card width",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/c223675ee8c058118c6958dbe11559797ac9c56c"
       }
     },
     {
