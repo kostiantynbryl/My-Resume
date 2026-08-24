@@ -1,25 +1,41 @@
 {
-  "generated_at": "2026-08-17T07:05:08.272729+00:00",
+  "generated_at": "2026-08-24T05:52:42.387358+00:00",
   "user": {
     "login": "kostiantynbryl",
-    "public_repos": 10,
-    "followers": 0
+    "public_repos": 11,
+    "followers": 1
   },
   "repos": [
+    {
+      "name": "RP2040-Audio-RGB",
+      "html_url": "https://github.com/kostiantynbryl/RP2040-Audio-RGB",
+      "language": "Python",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-18T09:55:54Z",
+      "pushed_at": "2026-08-18T09:53:37Z",
+      "description": "Real-time Windows audio reactive RGB lighting using RP2040, WASAPI loopback and FFT",
+      "homepage": null,
+      "archived": false,
+      "latest_commit": {
+        "sha": "db7fa4bad3bb",
+        "message": "Set tray icon before Qt tray becomes visible",
+        "url": "https://github.com/kostiantynbryl/RP2040-Audio-RGB/commit/db7fa4bad3bbffb98fcb3f55adc244051702ce96"
+      }
+    },
     {
       "name": "My-Resume",
       "html_url": "https://github.com/kostiantynbryl/My-Resume",
       "language": "HTML",
       "stargazers_count": 0,
-      "updated_at": "2026-08-17T07:00:27Z",
-      "pushed_at": "2026-08-17T07:04:53Z",
+      "updated_at": "2026-08-17T07:05:22Z",
+      "pushed_at": "2026-08-17T07:05:11Z",
       "description": null,
       "homepage": null,
       "archived": false,
       "latest_commit": {
-        "sha": "94aeb8a231fc",
-        "message": "Build rich localized About page",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/94aeb8a231fc8298633617ef05c0860c6851e566"
+        "sha": "fbdb03be9b9d",
+        "message": "build: refresh personal portfolio snapshot and social cards [skip ci]",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/fbdb03be9b9d66ebff535145f12ed27206b560b1"
       }
     },
     {
