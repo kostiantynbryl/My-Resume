@@ -1,11 +1,27 @@
 {
-  "generated_at": "2026-08-24T05:52:42.387358+00:00",
+  "generated_at": "2026-08-31T11:35:33.920131+00:00",
   "user": {
     "login": "kostiantynbryl",
     "public_repos": 11,
-    "followers": 1
+    "followers": 2
   },
   "repos": [
+    {
+      "name": "My-Resume",
+      "html_url": "https://github.com/kostiantynbryl/My-Resume",
+      "language": "HTML",
+      "stargazers_count": 0,
+      "updated_at": "2026-08-24T05:53:41Z",
+      "pushed_at": "2026-08-24T05:52:46Z",
+      "description": null,
+      "homepage": null,
+      "archived": false,
+      "latest_commit": {
+        "sha": "45a004148f78",
+        "message": "build: refresh personal portfolio snapshot and social cards [skip ci]",
+        "url": "https://github.com/kostiantynbryl/My-Resume/commit/45a004148f78882bd91f78e2884eef66c3699ff2"
+      }
+    },
     {
       "name": "RP2040-Audio-RGB",
       "html_url": "https://github.com/kostiantynbryl/RP2040-Audio-RGB",
@@ -20,22 +36,6 @@
         "sha": "db7fa4bad3bb",
         "message": "Set tray icon before Qt tray becomes visible",
         "url": "https://github.com/kostiantynbryl/RP2040-Audio-RGB/commit/db7fa4bad3bbffb98fcb3f55adc244051702ce96"
-      }
-    },
-    {
-      "name": "My-Resume",
-      "html_url": "https://github.com/kostiantynbryl/My-Resume",
-      "language": "HTML",
-      "stargazers_count": 0,
-      "updated_at": "2026-08-17T07:05:22Z",
-      "pushed_at": "2026-08-17T07:05:11Z",
-      "description": null,
-      "homepage": null,
-      "archived": false,
-      "latest_commit": {
-        "sha": "fbdb03be9b9d",
-        "message": "build: refresh personal portfolio snapshot and social cards [skip ci]",
-        "url": "https://github.com/kostiantynbryl/My-Resume/commit/fbdb03be9b9d66ebff535145f12ed27206b560b1"
       }
     },
     {
